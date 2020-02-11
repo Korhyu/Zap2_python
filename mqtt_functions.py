@@ -2,7 +2,7 @@
 import time
 import paho.mqtt.client as mqtt
 
-'''
+
 #Cosas de la Rasp
 import RPi.GPIO as GPIO 
 
@@ -16,7 +16,7 @@ GPIO.setwarnings(False)
 GPIO.setup(LED_PIN, GPIO.OUT) 
 GPIO.output(LED_PIN, GPIO.LOW) 
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-'''
+
 
 # Setup callback functions that are called when MQTT events happen like 
 # connecting to the server or receiving data from a subscribed feed. 
