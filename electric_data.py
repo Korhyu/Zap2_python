@@ -1,0 +1,73 @@
+import math
+from functions import funciones
+#from ORM import orm
+from scipy import signal
+
+from matplotlib import pyplot as plt
+
+
+class electric_data(funciones):
+    def __init__(self, ts, tm, av, ai, freq, phi):
+        self.ts = ts
+        self.tm = tm
+        self.tfin = math.ceil(tm / ts)
+        self.av = av
+        self.ai = ai
+        self.phi = phi
+
+        self.v = [0] * self.tfin                #Vector de tension
+        self.i = [0] * self.tfin                #Vector de corriente
+        self.t = [0] * self.tfin                #Vector de tiempo
+
+        self.pp = [0] * self.tfin               #Potencia activa
+        self.pq = [0] * self.tfin               #Potencia reactiva
+        self.ps = [0] * self.tfin               #Potencia aparente
+        
+        self.maxv_indx = 0                      #Indice de tension maxima
+        self.maxi_indx = 0                      #Indice de corriente maxia
+        self.cosfi = 0                          #Coseno fi
+        self.powfac = 0                         #Factor de potencia
+        self.freq = 0                           #Frecuencia medida
+        self.freq_dat = freq                    #Frecuencia para generador
+
+        self.V = [0]                            #Vector de tensiones fourier
+        self.I = [0]                            #Vector de corriente fourier
+        self.f = [0]                            #Vector de frecuencias fourier
+        self.fp = 0                             #Frecuencia de paso del vector
+        self.fs = 1/ts                          #Frecuencia de muestreo
+
+        self.magA = []                          #Magnitud de Armonicos
+        self.freA = []                          #Frecuencia de Armonicos
+        self.THD = 0                            #THD de señal
+
+        self.a = []                             #Componentes del filtro
+        self.b = []                             #Componentes del filtro
+        self.filt = []                          #Señal Filtrada
+    
+    def gen_data(self, arm_div = None, arm_freq = None):
+        
+        if arm_div is not None and arm_freq is not None:
+            self.generate_signal(arm_div, arm_freq)
+        
+        else:
+            self.generate_signal()
+
+
+    def analize(self):
+        
+        self.fourier_data()                             #Calculo de Fourier
+
+        self.design_filter('C1', 1, [100*self.ts, 200*self.ts], 60)
+        self.filtrado(self.i)
+        
+        self.power_calc()                               #Calculo de potencias
+        self.freq = self.get_freq(self.i, self.ts)      #Calculo de frecuencia
+        self.cosfi = self.get_cosfi()                   #Calculo de coseno fi
+        self.find_armonics(self.I)                      #Cargado de vector de armonicos
+        self.THD_cal()                                  #Calculo THD
+        self.PF_cal()                                   #Calculo del power factor
+
+
+    def show_data(self):
+        self.plot_data()
+
