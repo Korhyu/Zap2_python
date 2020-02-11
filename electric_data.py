@@ -38,11 +38,11 @@ class electric_data(funciones):
 
         self.magA = []                          #Magnitud de Armonicos
         self.freA = []                          #Frecuencia de Armonicos
-        self.THD = 0                            #THD de señal
+        self.THD = 0                            #THD de senal
 
         self.a = []                             #Componentes del filtro
         self.b = []                             #Componentes del filtro
-        self.filt = []                          #Señal Filtrada
+        self.filt = []                          #Senal Filtrada
     
     def gen_data(self, arm_div = None, arm_freq = None):
         
