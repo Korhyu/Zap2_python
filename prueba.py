@@ -1,3 +1,6 @@
+#SQL
+import MySQLdb
+
 # RPi
 import time
 import paho.mqtt.client as mqtt

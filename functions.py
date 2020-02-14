@@ -149,7 +149,7 @@ class funciones:
             self.THD = (num / vec[0]) * 100
 
     def PF_cal(self, vec = None):
-        '''Calculo del power factor de la señal'''
+        '''Calculo del power factor de la senal'''
         self.powfac = self.cosfi / math.pow(1 + math.pow(self.THD/100,2), 0.5)
 
     def printdata (self):
