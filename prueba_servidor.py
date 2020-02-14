@@ -22,6 +22,11 @@ GPIO.output(LED_PIN, GPIO.LOW)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 
 
+db = MySQLdb.connect(host="localhost",
+                     user="zap2app",
+                     passwd="zap2app",
+                     db="zap2")
+
 
 # Setup callback functions that are called when MQTT events happen like 
 # connecting to the server or receiving data from a subscribed feed. 
@@ -32,11 +37,17 @@ def on_connect(client, userdata, flags, rc):
    client.subscribe("/suma")
    client.subscribe("/resta")
    client.subscribe("/promedio")
+   client.subscribe("/lectura")
 
 
 # The callback for when a PUBLISH message is received from the server. 
-def on_message(client, userdata, msg): 
-    print(msg.topic+" "+str( msg.payload)) 
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str( msg.payload))
+
+    # you must create a Cursor object. It will let
+    # you execute all the queries you need
+    cur = db.cursor()
+
     # Check if this is a message for the Pi LED. 
     if msg.topic == '/suma': 
         cont = cont + 1
@@ -47,6 +58,8 @@ def on_message(client, userdata, msg):
             cont = 0
             print('La suma es ', aux)
 
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('s'," + str(aux) + ')')
+
     if msg.topic == '/resta': 
         cont = cont + 1
         if cont == 1:
@@ -56,6 +69,8 @@ def on_message(client, userdata, msg):
             cont = 0
             print('La resta es ', aux) 
 
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('r'," + str(aux) + ')')
+
     if msg.topic == '/promedio': 
         cont = cont + 1
         if cont == 1:
@@ -64,6 +79,10 @@ def on_message(client, userdata, msg):
             aux == (aux + re.findall("\d+\.\d+", msg.payload)) / cont
             cont = 0
             print('El promedio es ', aux)
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('p'," + str(aux) + ')')
+
+    if msg.topic == '/lectura':
+        'leer la base de datos completa'
 
 
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
