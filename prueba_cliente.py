@@ -13,8 +13,8 @@ def on_connect(client, userdata, flags, rc):
    print("Connected with result code " + str(rc)) 
    # Subscribing in on_connect() means that if we lose the connection and 
    # reconnect then subscriptions will be renewed. 
-   client.subscribe("/promedio")
-   client.subscribe("/devol")
+   client.subscribe("promedio", qos=0)
+   client.subscribe("devol", qos=0)
 
 
 # The callback for when a PUBLISH message is received from the server. 
@@ -42,8 +42,8 @@ while True:
     num1 = random.randint(1,101)
     num2 = random.randint(1,101)
     print('publicando suma de numeros ' + str(num1) + ' y ' + str(num2))
-    client.publish('/suma', num1)
-    client.publish('/suma', num2)
+    client.publish(topic='suma', payload=num1, qos=0, retain=False)
+    client.publish(topic='suma', payload=num2, qos=0, retain=False)
 
     time.sleep(3)
     print('publicando resta de numeros ' + str(num1) + ' y ' + str(num2))
