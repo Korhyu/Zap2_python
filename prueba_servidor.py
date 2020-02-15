@@ -34,61 +34,25 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc)) 
     # Subscribing in on_connect() means that if we lose the connection and 
     # reconnect then subscriptions will be renewed. 
-    client.subscribe("suma", qos=0)
-    client.subscribe("resta", qos=0)
-    client.subscribe("promedio", qos=0)
-    client.subscribe("lectura", qos=0)
-    client.message_callback_add("suma", on_message_suma)
-    client.message_callback_add("resta", on_message_resta)
-    client.message_callback_add("promedio", on_message_promedio)
-    client.message_callback_add("promedio", on_message_lectura)
+    client.subscribe("esc", qos=0)
+    client.subscribe("lec", qos=0)
+    client.message_callback_add("esc", on_message_esc)
+    client.message_callback_add("lec", on_message_lec)
 
-def on_message_suma(client, userdata, msg):
+
+def on_message_esc(client, userdata, msg):
     cur = db.cursor()
-    cont = cont + 1
-    print("cont = ", cont)
-    if cont == 1:
-        aux = re.findall("\d+\.\d+", msg.payload)
-    if cont == 2:
-        aux == aux + re.findall("\d+\.\d+", msg.payload)
-        cont = 0
-        print("La suma es ", aux)
+    comando = "INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test'," + str(msg.payload) + ")"
+    print("QUERY: " + comando)
+    cur.execute(comando)
 
-        cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('s'," + str(aux) + ")")
-
-def on_message_resta(client, userdata, msg):
-    cur = db.cursor()
-    cont = cont + 1
-    if msg.topic == "/resta": 
-        if cont == 1:
-            aux = re.findall("\d+\.\d+", msg.payload)
-        if cont == 2:
-            aux == aux + re.findall("\d+\.\d+", msg.payload)
-            cont = 0
-            print("La resta es ", aux) 
-
-            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('r'," + str(aux) + ")")
-
-def on_message_promedio(client, userdata, msg):
-    cur = db.cursor()
-    cont = cont + 1
-    if msg.topic == "/promedio": 
-        if cont == 1:
-            aux = re.findall("\d+\.\d+", msg.payload)
-        if cont == 2:
-            aux == (aux + re.findall("\d+\.\d+", msg.payload)) / cont
-            cont = 0
-            print("El promedio es ", aux)
-            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('p'," + str(aux) + ")")
+def on_message_lec(client, userdata, msg):
+    print("todavia nada")
 
 
 # The callback for when a PUBLISH message is received from the server. 
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str( msg.payload))
-
-    if msg.topic == "/lectura":
-        "leer la base de datos completa"
-
+    print("Recibido: " + msg.topic + " " + str( msg.payload))
 
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 

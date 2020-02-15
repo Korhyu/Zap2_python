@@ -13,7 +13,7 @@ def on_connect(client, userdata, flags, rc):
    print("Connected with result code " + str(rc)) 
    # Subscribing in on_connect() means that if we lose the connection and 
    # reconnect then subscriptions will be renewed. 
-   client.subscribe("promedio", qos=0)
+   client.subscribe("lec", qos=0)
    client.subscribe("devol", qos=0)
 
 
@@ -39,23 +39,11 @@ client.loop_start()
 # Main loop to listen for button presses. 
 print('Script is running, press Ctrl-C to quit...') 
 while True:
-    num1 = random.randint(1,101)
-    num2 = random.randint(1,101)
-    print('publicando suma de numeros ' + str(num1) + ' y ' + str(num2))
-    client.publish(topic='suma', payload=num1, qos=0, retain=False)
-    client.publish(topic='suma', payload=num2, qos=0, retain=False)
+    num = random.randint(1,101)
 
+    print('publicando el numero ' + str(num))
+    client.publish(topic='esc', payload=num, qos=0, retain=False)
     time.sleep(3)
-    print('publicando resta de numeros ' + str(num1) + ' y ' + str(num2))
-    client.publish('/resta', num1)
-    client.publish('/resta', num2)
-
-    time.sleep(3)
-    print('publicando promedio de numeros ' + str(num1) + ' y ' + str(num2))
-    client.publish('/promedio', num1)
-    client.publish('/promedio', num2)
-
-
 
 
 '''
