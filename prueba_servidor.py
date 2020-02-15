@@ -53,9 +53,12 @@ def on_message(client, userdata, msg):
         cont = cont + 1
         if cont == 1:
             aux = re.findall("\d+\.\d+", msg.payload)
+            print('cont = ', cont)
         if cont == 2:
             aux == aux + re.findall("\d+\.\d+", msg.payload)
+            print('cont = ', cont)
             cont = 0
+            print('cont = ', cont)
             print('La suma es ', aux)
 
             cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('s'," + str(aux) + ')')

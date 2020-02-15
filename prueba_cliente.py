@@ -37,25 +37,26 @@ client.loop_start()
 # Main loop to listen for button presses. 
 print('Script is running, press Ctrl-C to quit...') 
 while True: 
-    operacion = input('Ingrese la operacion a realizar: ')
-    if operacion != 'l':
+    operacion = str(input('Ingrese la operacion a realizar: '))
+    print (type(operacion))
+    if operacion != "l":
         num1 = input('Ingrese el primer numero:  ')
         num2 = input('Ingrese el segundo numero: ')
 
-        if operacion == 's':
+        if operacion == "s":
             client.publish('/suma', num1)
             client.publish('/suma', num2)
         
-        if operacion == 'r':
+        if operacion == "r":
             client.publish('/resta', num1)
             client.publish('/resta', num2)
 
-        if operacion == 's':
+        if operacion == "p":
             client.publish('/promedio', num1)
             client.publish('/promedio', num2)
 
         else:
-            print("Ingrese un caracter valido \ns para sumar \nr para restar \np para promediar \nl para leer la base")
+            print("Ingrese un caracter valido \n's' para sumar \n'r' para restar \n'p' para promediar \n'l' para leer la base")
 
     else:
         client.publish('/completo')
