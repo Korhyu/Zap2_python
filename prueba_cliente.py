@@ -2,6 +2,8 @@
 import time
 import paho.mqtt.client as mqtt
 import re
+import string
+import random
 
 
 
@@ -36,27 +38,47 @@ client.connect('192.168.0.21', 1883, 60)
 client.loop_start() 
 # Main loop to listen for button presses. 
 print('Script is running, press Ctrl-C to quit...') 
-while True: 
-    operacion = str(input('Ingrese la operacion a realizar: '))
-    print (type(operacion))
-    if operacion != "l":
+while True:
+    num1 = random.randint(1,101)
+    num2 = random.randint(1,101)
+    print('publicando suma de numeros ' + str(num1) + ' y ' + str(num2))
+    client.publish('/suma', num1)
+    client.publish('/suma', num2)
+
+    time.sleep(3)
+    print('publicando resta de numeros ' + str(num1) + ' y ' + str(num2))
+    client.publish('/resta', num1)
+    client.publish('/resta', num2)
+
+    time.sleep(3)
+    print('publicando promedio de numeros ' + str(num1) + ' y ' + str(num2))
+    client.publish('/promedio', num1)
+    client.publish('/promedio', num2)
+
+
+
+
+'''
+operacion = input('Ingrese la operacion a realizar: ')
+    if operacion != 4:
         num1 = input('Ingrese el primer numero:  ')
         num2 = input('Ingrese el segundo numero: ')
 
-        if operacion == "s":
+        if operacion == 1:
             client.publish('/suma', num1)
             client.publish('/suma', num2)
         
-        if operacion == "r":
+        elif operacion == 2:
             client.publish('/resta', num1)
             client.publish('/resta', num2)
 
-        if operacion == "p":
+        elif operacion == 3:
             client.publish('/promedio', num1)
             client.publish('/promedio', num2)
 
         else:
-            print("Ingrese un caracter valido \n's' para sumar \n'r' para restar \n'p' para promediar \n'l' para leer la base")
+            print("Ingrese un caracter valido \n\t'1' para sumar \n\t'2' para restar \n\t'3' para promediar \n\t'4' para leer la base")
 
     else:
         client.publish('/completo')
+'''

@@ -49,7 +49,7 @@ def on_message(client, userdata, msg):
     cur = db.cursor()
 
     # Check if this is a message for the Pi LED. 
-    if msg.topic == "/suma":
+    if msg.topic is "/suma":
         cont = cont + 1
         print("cont = ", cont)
         if cont == 1:
