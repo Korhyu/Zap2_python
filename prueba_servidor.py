@@ -49,44 +49,44 @@ def on_message(client, userdata, msg):
     cur = db.cursor()
 
     # Check if this is a message for the Pi LED. 
-    if msg.topic == '/suma':
+    if msg.topic == "/suma":
         cont = cont + 1
-        print('cont = ', cont)
+        print("cont = ", cont)
         if cont == 1:
             aux = re.findall("\d+\.\d+", msg.payload)
-            print('cont = ', cont)
+            print("cont = ", cont)
         if cont == 2:
             aux == aux + re.findall("\d+\.\d+", msg.payload)
-            print('cont = ', cont)
+            print("cont = ", cont)
             cont = 0
-            print('cont = ', cont)
-            print('La suma es ', aux)
+            print("cont = ", cont)
+            print("La suma es ", aux)
 
-            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('s'," + str(aux) + ')')
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('s'," + str(aux) + ")")
 
-    if msg.topic == '/resta': 
+    if msg.topic == "/resta": 
         cont = cont + 1
         if cont == 1:
             aux = re.findall("\d+\.\d+", msg.payload)
         if cont == 2:
             aux == aux + re.findall("\d+\.\d+", msg.payload)
             cont = 0
-            print('La resta es ', aux) 
+            print("La resta es ", aux) 
 
-            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('r'," + str(aux) + ')')
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('r'," + str(aux) + ")")
 
-    if msg.topic == '/promedio': 
+    if msg.topic == "/promedio": 
         cont = cont + 1
         if cont == 1:
             aux = re.findall("\d+\.\d+", msg.payload)
         if cont == 2:
             aux == (aux + re.findall("\d+\.\d+", msg.payload)) / cont
             cont = 0
-            print('El promedio es ', aux)
-            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('p'," + str(aux) + ')')
+            print("El promedio es ", aux)
+            cur.execute("INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('p'," + str(aux) + ")")
 
-    if msg.topic == '/lectura':
-        'leer la base de datos completa'
+    if msg.topic == "/lectura":
+        "leer la base de datos completa"
 
 
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
@@ -94,11 +94,11 @@ def on_message(client, userdata, msg):
 client = mqtt.Client() 
 client.on_connect = on_connect 
 client.on_message = on_message 
-client.connect('localhost', 1883, 60) 
+client.connect("localhost", 1883, 60) 
 # Connect to the MQTT server and process messages in a background thread. 
 client.loop_start() 
 # Main loop to listen for button presses. 
-print('Script is running, press Ctrl-C to quit...') 
+print("Script is running, press Ctrl-C to quit...") 
 while True: 
    # Look for a change from high to low value on the button input to 
    # signal a button press. 
@@ -106,6 +106,6 @@ while True:
    time.sleep(0.02)  # Delay for about 20 milliseconds to debounce. 
    button_second = GPIO.input(BUTTON_PIN) 
    if button_first == GPIO.HIGH and button_second == GPIO.LOW: 
-       print('Button pressed!') 
+       print("Button pressed!") 
        # Send a toggle message to the ESP8266 LED topic. 
-       client.publish('/leds/esp8266', 'TOGGLE') 
+       client.publish("/leds/esp8266", "TOGGLE") 
