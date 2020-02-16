@@ -2,8 +2,8 @@ import mysql.connector
 from mysql.connector import Error
 
 def insertVariblesIntoTable():
-    cad = input("Ingrese la cadena: ")
-    num = input("Ingrese el numero: ")
+    cad = str(input("Ingrese la cadena: "))
+    num = str(input("Ingrese el numero: "))
     try:
         connection = mysql.connector.connect(host='localhost',
                                              database='zap2',
