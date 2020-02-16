@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 
 
-class funciones:
+class funcionesSQL:
     def __init__ (self):
         connection = mysql.connector.connect(host='localhost',
                                                 database='zap2',
