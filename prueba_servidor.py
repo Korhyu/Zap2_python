@@ -45,6 +45,7 @@ def on_message_esc(client, userdata, msg):
     comando = "INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test'," + str(msg.payload) + ")"
     print("QUERY: " + comando)
     cur.execute(comando)
+    cur.close()
 
 def on_message_lec(client, userdata, msg):
     print("todavia nada")
