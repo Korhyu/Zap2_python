@@ -23,10 +23,10 @@ class funcionesSQL:
 
     def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
         try:
-            self.cursor = self.connection.cursor()
+            cursor = self.connection.cursor()
             mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, timestamp, valor) VALUES (%s, %s, %s, %s) """
             recordTuple = (instalacion, tipo_med, tiempo, valor)
-            self.cursor.execute(mySql_insert_query, recordTuple)
+            cursor.execute(mySql_insert_query, recordTuple)
             self.connection.commit()
             print("Datos insertados en la tabla medicion")
 
@@ -42,10 +42,10 @@ class funcionesSQL:
 
     def insertar_prueba_db(self, cadena, valor):
         try:
-            self.cursor = self.connection.cursor()
+            cursor = self.connection.cursor()
             mySql_insert_query = """INSERT INTO prueba (cadena, valor) VALUES (%s, %s) """
             recordTuple = (cadena, valor)
-            self.cursor.execute(mySql_insert_query, recordTuple)
+            cursor.execute(mySql_insert_query, recordTuple)
             self.connection.commit()
             print("Datos insertados en la tabla prueba")
 
@@ -54,6 +54,6 @@ class funcionesSQL:
 
         finally:
             if (self.connection.is_connected()):
-                self.cursor.close()
+                cursor.close()
                 self.connection.close()
                 print("Conexion cerada")
