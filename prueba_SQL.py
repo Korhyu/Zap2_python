@@ -1,18 +1,16 @@
 import mysql.connector
 from mysql.connector import Error
-
-connection = mysql.connector(host='localhost',
-                                             database='zap2',
-                                             user='zap2app',
-                                             password='zap2app')
-
+from Zap2_python.sql_functions import funciones
 
 
 def insertVariblesIntoTable(cad, num):
     #cad = str(input("Ingrese la cadena: "))
     #num = str(input("Ingrese el numero: "))
     try:
-        connection.connect()
+        connection = mysql.connector.connect(host='localhost',
+                                             database='zap2',
+                                             user='zap2app',
+                                             password='zap2app')
         cursor = connection.cursor()
         mySql_insert_query = """INSERT INTO prueba (cadena, coma) 
                                 VALUES (%s, %s) """
@@ -31,6 +29,6 @@ def insertVariblesIntoTable(cad, num):
             connection.close()
             print("Conexion cerada")
 
-insertVariblesIntoTable('asdasd', -24)
-insertVariblesIntoTable('gyhtrh', -30)
+funciones.insertar_prueba_db('asdasd', -24)
+funciones.insertar_prueba_db('gyhtrh', -30)
 

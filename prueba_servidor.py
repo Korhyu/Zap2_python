@@ -1,6 +1,7 @@
 #SQL
 import mysql.connector
 from mysql.connector import Error
+from Zap2_python.sql_functions import insertar
 
 # RPi
 import time
@@ -87,7 +88,7 @@ finally:
     if (db.is_connected()):
         cursor.close()
         db.close()
-        print("MySQL connection is closed - Linea 90")
+        print("MySQL connection is closed")
 
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
@@ -97,23 +98,7 @@ client.on_message = on_message
 client.connect("localhost", 1883, 60)  
 client.loop_start() 
  
-try:
-    cur = db.cursor()
-    instruccion = """INSERT INTO prueba(cadena, coma) VALUES ('test', 1)"""
-    cur.execute(instruccion)
 
-except Error as e:
-    print("Error enviando el dato ", e)
-
-finally:
-    if (db.is_connected()):
-        cursor.close()
-        db.close()
-        print("MySQL connection is closed - Linea 113")
-
-'''
 print("Script is running, press Ctrl-C to quit...") 
 while True:
-    print("Programa corriendo")
-    time.sleep(5)
-'''
+    
