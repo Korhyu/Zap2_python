@@ -9,14 +9,14 @@ datos = ''' host='localhost',
 
 class funcionesSQL:
     def __init__ (self):
-        connection = mysql.connector(   host='localhost',
-                                        database='zap2',
-                                        user='zap2app',
-                                        password='zap2app' )
-
+        pass
+    
     def insertar_prueba_db(self, cadena, valor):
         try:
-            connection = connection.connect()
+            connection = mysql.connector.connect(   host='localhost',
+                                                    database='zap2',
+                                                    user='zap2app',
+                                                    password='zap2app' )
             cursor = connection.cursor()
             mySql_insert_query = """INSERT INTO prueba (cadena, valor) VALUES (%s, %s) """
             recordTuple = (cadena, valor)
