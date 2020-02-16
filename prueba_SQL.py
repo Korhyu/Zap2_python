@@ -1,45 +1,32 @@
-#SQL
 import mysql.connector
 from mysql.connector import Error
-import time
 
+def insertVariblesIntoTable():
+    cad = input("Ingrese la cadena: ")
+    num = input("Ingrese el numero: ")
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                             database='zap2',
+                                             user='zap2app',
+                                             password='zap2app')
+        cursor = connection.cursor()
+        mySql_insert_query = """INSERT INTO prueba (cadena, coma) 
+                                VALUES (%s, %s) """
 
-# Datos de la base de datos
-db = mysql.connector.connect(   host="localhost",
-                                user="zap2app",
-                                passwd="zap2app",
-                                db="zap2")
+        recordTuple = (cad, num)
+        cursor.execute(mySql_insert_query, recordTuple)
+        connection.commit()
+        print("Record inserted successfully into prueba table")
 
+    except mysql.connector.Error as error:
+        print("Failed to insert into MySQL table {}".format(error))
 
-#Funcion ppal, primero verifico que la conexion con la db funcione
-try:
-    if db.is_connected():
-        db_Info = db.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = db.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
+    finally:
+        if (connection.is_connected()):
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
 
-except Error as e:
-    print("Error while connecting to MySQL", e)
-
-finally:
-    if (db.is_connected()):
-        cursor.close()
-        db.close()
-        print("MySQL connection is closed")
-
-try:
-    cur = db.cursor()
-    instruccion = """INSERT INTO prueba(cadena, coma) VALUES ('test', 1)"""
-    cur.execute(instruccion)
-
-except Error as e:
-    print("Error enviando el dato ", e)
-
-finally:
-    if (db.is_connected()):
-        cursor.close()
-        db.close()
-        print("MySQL connection is closed")
+insertVariblesIntoTable()
+insertVariblesIntoTable()
+insertVariblesIntoTable()
