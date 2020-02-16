@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from sql_functions import funciones
+from sql_functions import funcionesSQL
 
 
 def insertVariblesIntoTable(cad, num):
@@ -30,7 +30,7 @@ def insertVariblesIntoTable(cad, num):
             print("Conexion cerada")
 
 
-conexion = funciones()
+conexion = funcionesSQL()
 conexion.insertar_prueba_db('asdasd', -24)
 conexion.insertar_prueba_db('gyhtrh', -30)
 

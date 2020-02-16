@@ -21,39 +21,39 @@ class funciones:
                 connection.close()
                 print("Conexion cerada")
 
-def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
-    try:
-        cursor = self.connection.cursor()
-        mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, timestamp, valor) VALUES (%s, %s, %s, %s) """
-        recordTuple = (instalacion, tipo_med, tiempo, valor)
-        self.cursor.execute(mySql_insert_query, recordTuple)
-        self.connection.commit()
-        print("Datos insertados en la tabla medicion")
+    def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
+        try:
+            cursor = self.connection.cursor()
+            mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, timestamp, valor) VALUES (%s, %s, %s, %s) """
+            recordTuple = (instalacion, tipo_med, tiempo, valor)
+            self.cursor.execute(mySql_insert_query, recordTuple)
+            self.connection.commit()
+            print("Datos insertados en la tabla medicion")
 
-    except mysql.connector.Error as error:
-        print("Error al insertar en la base de datos {}".format(error))
+        except mysql.connector.Error as error:
+            print("Error al insertar en la base de datos {}".format(error))
 
-    finally:
-        if (self.connection.is_connected()):
-            cursor.close()
-            self.connection.close()
-            print("Conexion cerada")
+        finally:
+            if (self.connection.is_connected()):
+                cursor.close()
+                self.connection.close()
+                print("Conexion cerada")
 
 
-def insertar_prueba_db(self, cadena, valor):
-    try:
-        cursor = self.connection.cursor()
-        mySql_insert_query = """INSERT INTO prueba (cadena, valor) VALUES (%s, %s) """
-        recordTuple = (cadena, valor)
-        cursor.execute(mySql_insert_query, recordTuple)
-        self.connection.commit()
-        print("Datos insertados en la tabla prueba")
+    def insertar_prueba_db(self, cadena, valor):
+        try:
+            cursor = self.connection.cursor()
+            mySql_insert_query = """INSERT INTO prueba (cadena, valor) VALUES (%s, %s) """
+            recordTuple = (cadena, valor)
+            cursor.execute(mySql_insert_query, recordTuple)
+            self.connection.commit()
+            print("Datos insertados en la tabla prueba")
 
-    except mysql.connector.Error as error:
-        print("Error al insertar en la base de datos {}".format(error))
+        except mysql.connector.Error as error:
+            print("Error al insertar en la base de datos {}".format(error))
 
-    finally:
-        if (self.connection.is_connected()):
-            cursor.close()
-            self.connection.close()
-            print("Conexion cerada")
+        finally:
+            if (self.connection.is_connected()):
+                cursor.close()
+                self.connection.close()
+                print("Conexion cerada")
