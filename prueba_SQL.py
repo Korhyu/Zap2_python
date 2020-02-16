@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from Zap2_python.sql_functions import funciones
+from sql_functions import funciones
 
 
 def insertVariblesIntoTable(cad, num):
