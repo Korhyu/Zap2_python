@@ -1,16 +1,18 @@
 import mysql.connector
 from mysql.connector import Error
 
+datos = ''' host='localhost',
+            database='zap2',
+            user='zap2app',
+            password='zap2app' '''
+
 
 class funcionesSQL:
     def __init__ (self):
-        datos = ''' host='localhost',
-                    database='zap2',
-                    user='zap2app',
-                    password='zap2app' '''
-
+        pass
 
     def insertar_prueba_db(self, cadena, valor):
+        connection = []
         try:
             connection = mysql.connector.connect( self.datos )
             cursor = connection.cursor()
