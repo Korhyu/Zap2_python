@@ -4,21 +4,21 @@ from mysql.connector import Error
 
 class funcionesSQL:
     def __init__ (self):
-        self.connection = mysql.connector.connect(   host='localhost',
+        connection = mysql.connector.connect(   host='localhost',
                                                 database='zap2',
                                                 user='zap2app',
                                                 password='zap2app')
 
         try: 
-            self.cursor = connection.cursor()
+            cursor = connection.cursor()
 
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
 
         finally:
-            if (self.connection.is_connected()):
-                self.cursor.close()
-                self.connection.close()
+            if (connection.is_connected()):
+                cursor.close()
+                connection.close()
                 print("Conexion cerada")
 
     def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
