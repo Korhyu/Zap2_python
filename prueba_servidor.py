@@ -49,11 +49,11 @@ def on_message_esc(client, userdata, msg):
         cur.execute(instruccion, datos)
         cur.close()
 
-
+'''
 # Funcion de lectura de db
 def on_message_lec(client, userdata, msg):
     print("todavia nada")
-
+'''
 
 # The callback for when a PUBLISH message is received from the server. 
 def on_message(client, userdata, msg):
