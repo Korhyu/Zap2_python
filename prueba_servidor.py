@@ -87,7 +87,7 @@ finally:
     if (db.is_connected()):
         cursor.close()
         db.close()
-        print("MySQL connection is closed")
+        print("MySQL connection is closed - Linea 90")
 
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
@@ -110,7 +110,7 @@ finally:
     if (db.is_connected()):
         cursor.close()
         db.close()
-        print("MySQL connection is closed")
+        print("MySQL connection is closed - Linea 113")
 
 '''
 print("Script is running, press Ctrl-C to quit...") 
