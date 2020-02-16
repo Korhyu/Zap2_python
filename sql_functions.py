@@ -4,7 +4,7 @@ from mysql.connector import Error
 
 class funcionesSQL:
     def __init__ (self):
-        connection = mysql.connector.connect(host='localhost',
+        connection = mysql.connector.connect(   host='localhost',
                                                 database='zap2',
                                                 user='zap2app',
                                                 password='zap2app')
