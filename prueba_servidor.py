@@ -101,7 +101,6 @@ try:
     cur = db.cursor()
     instruccion = """INSERT INTO prueba(cadena, coma) VALUES ('test', 1)"""
     cur.execute(instruccion)
-    cur.close()
 
 except Error as e:
     print("Error enviando el dato ", e)
