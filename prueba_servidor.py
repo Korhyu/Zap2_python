@@ -1,5 +1,6 @@
 #SQL
-import MySQLdb
+import mysql.connector
+from mysql.connector import Error
 
 # RPi
 import time
@@ -20,12 +21,6 @@ GPIO.setwarnings(False)
 GPIO.setup(LED_PIN, GPIO.OUT) 
 GPIO.output(LED_PIN, GPIO.LOW) 
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-
-
-db = MySQLdb.connect(host="localhost",
-                     user="zap2app",
-                     passwd="zap2app",
-                     db="zap2")
 
 
 # Setup callback functions that are called when MQTT events happen like 
@@ -55,7 +50,29 @@ def on_message_lec(client, userdata, msg):
 def on_message(client, userdata, msg):
     print("Recibido: " + msg.topic + " " + str( msg.payload))
 
-# Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
+
+try:
+    db = mysql.connector.connect(   host="localhost",
+                                    user="zap2app",
+                                    passwd="zap2app",
+                                    db="zap2")
+    if db.is_connected():
+        db_Info = db.get_server_info()
+        print("Connected to MySQL Server version ", db_Info)
+        cursor = db.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("You're connected to database: ", record)
+
+
+except Error as e:
+    print("Error while connecting to MySQL", e)
+
+finally:
+    if (db.is_connected()):
+        cursor.close()
+        db.close()
+        print("MySQL connection is closed")# Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
 client = mqtt.Client() 
 client.on_connect = on_connect 
@@ -65,13 +82,3 @@ client.connect("localhost", 1883, 60)
 client.loop_start() 
 # Main loop to listen for button presses. 
 print("Script is running, press Ctrl-C to quit...") 
-while True: 
-   # Look for a change from high to low value on the button input to 
-   # signal a button press. 
-   button_first = GPIO.input(BUTTON_PIN) 
-   time.sleep(0.02)  # Delay for about 20 milliseconds to debounce. 
-   button_second = GPIO.input(BUTTON_PIN) 
-   if button_first == GPIO.HIGH and button_second == GPIO.LOW: 
-       print("Button pressed!") 
-       # Send a toggle message to the ESP8266 LED topic. 
-       client.publish("/leds/esp8266", "TOGGLE") 
