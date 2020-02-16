@@ -29,7 +29,7 @@ db = mysql.connector.connect(   host="localhost",
                                 passwd="zap2app",
                                 db="zap2")
 
-
+# Funcion que se ejecuta en la conexion
 def on_connect(client, userdata, flags, rc): 
     print("Connected with result code " + str(rc)) 
 
@@ -39,6 +39,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("lec", on_message_lec)
 
 
+#funcion de escritura de db
 def on_message_esc(client, userdata, msg):
     try:
         cur = db.cursor()
@@ -48,6 +49,8 @@ def on_message_esc(client, userdata, msg):
         cur.execute(instruccion, datos)
         cur.close()
 
+
+# Funcion de lectura de db
 def on_message_lec(client, userdata, msg):
     print("todavia nada")
 
