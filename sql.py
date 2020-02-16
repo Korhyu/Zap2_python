@@ -1,15 +1,9 @@
 import MySQLdb
 
-db = MySQLdb.connect(host="10.10.10.115",   # your host, usually localhost
+db = MySQLdb.connect(host="localhost",   # your host, usually localhost
                      user="zap2app",        # your username
                      passwd="zap2app",      # your password
                      db="zap2")             # name of the data base
-'''
-db = MySQLdb.connect(host="localhost",
-                     user="zap2app",
-                     passwd="zap2app",
-                     db="zap2")
-'''
 
 # you must create a Cursor object. It will let
 # you execute all the queries you need

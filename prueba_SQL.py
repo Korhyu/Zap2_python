@@ -1,14 +1,18 @@
 import mysql.connector
 from mysql.connector import Error
 
+connection = mysql.connector(host='localhost',
+                                             database='zap2',
+                                             user='zap2app',
+                                             password='zap2app')
+
+
+
 def insertVariblesIntoTable(cad, num):
     #cad = str(input("Ingrese la cadena: "))
     #num = str(input("Ingrese el numero: "))
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                             database='zap2',
-                                             user='zap2app',
-                                             password='zap2app')
+        connection.connect()
         cursor = connection.cursor()
         mySql_insert_query = """INSERT INTO prueba (cadena, coma) 
                                 VALUES (%s, %s) """
@@ -16,17 +20,17 @@ def insertVariblesIntoTable(cad, num):
         recordTuple = (cad, num)
         cursor.execute(mySql_insert_query, recordTuple)
         connection.commit()
-        print("Record inserted successfully into prueba table")
+        print("Datos insertados en la tabla prueba")
 
     except mysql.connector.Error as error:
-        print("Failed to insert into MySQL table {}".format(error))
+        print("Error al insertar en la base de datos {}".format(error))
 
     finally:
         if (connection.is_connected()):
             cursor.close()
             connection.close()
-            print("MySQL connection is closed")
+            print("Conexion cerada")
 
-insertVariblesIntoTable('Area 51M', 6999)
-insertVariblesIntoTable('Area 52M', 4000)
+insertVariblesIntoTable('asdasd', -24)
+insertVariblesIntoTable('gyhtrh', -30)
 
