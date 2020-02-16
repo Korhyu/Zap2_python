@@ -16,7 +16,7 @@ class funciones:
             print("Error al insertar en la base de datos {}".format(error))
 
         finally:
-            if (self.connection.is_connected()):
+            if (connection.is_connected()):
                 cursor.close()
                 connection.close()
                 print("Conexion cerada")
