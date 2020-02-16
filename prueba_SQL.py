@@ -1,9 +1,9 @@
 import mysql.connector
 from mysql.connector import Error
 
-def insertVariblesIntoTable():
-    cad = str(input("Ingrese la cadena: "))
-    num = str(input("Ingrese el numero: "))
+def insertVariblesIntoTable(cad, num):
+    #cad = str(input("Ingrese la cadena: "))
+    #num = str(input("Ingrese el numero: "))
     try:
         connection = mysql.connector.connect(host='localhost',
                                              database='zap2',
@@ -27,6 +27,6 @@ def insertVariblesIntoTable():
             connection.close()
             print("MySQL connection is closed")
 
-insertVariblesIntoTable()
-insertVariblesIntoTable()
-insertVariblesIntoTable()
+insertVariblesIntoTable('Area 51M', 6999)
+insertVariblesIntoTable('Area 52M', 4000)
+
