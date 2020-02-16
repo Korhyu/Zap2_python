@@ -18,6 +18,23 @@ class funcionesSQL:
         finally:
             if (connection.is_connected()):
                 cursor.close()
+                print("Conexion cerada")
+
+    def test_conecction(self):
+        try:
+            connection = mysql.connector.connect(   host='localhost',
+                                                    database='zap2',
+                                                    user='zap2app',
+                                                    password='zap2app') 
+            cursor = connection.cursor()
+
+        except mysql.connector.Error as error:
+            print("Error al insertar en la base de datos {}".format(error))
+
+        finally:
+            if (connection.is_connected()):
+                print("Conexion exitosa")
+                cursor.close()
                 connection.close()
                 print("Conexion cerada")
 
