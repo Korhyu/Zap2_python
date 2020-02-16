@@ -1,22 +1,26 @@
-import sqlobject as SO
+#import sqlobject as SO
 
 from electric_data import electric_data
-from mqtt_functions import on_connect
-from mqtt_functions import on_message
+
 
 import paho.mqtt.client as mqtt
 from scipy.signal import blackman
 from scipy.fftpack import fft
 
+'''
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
-# this script and the MQTT server. 
+# this script and the MQTT server.
+from mqtt_functions import on_connect
+from mqtt_functions import on_message
+
 client = mqtt.Client() 
 client.on_connect = on_connect 
 client.on_message = on_message 
 client.connect('localhost', 1883, 60) 
 
 # Connect to the MQTT server and process messages in a background thread. 
-client.loop_start() 
+client.loop_start()
+'''
 
 
 tm = 2                      #Tiempo de muestreo

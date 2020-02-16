@@ -29,6 +29,8 @@ def insertVariblesIntoTable(cad, num):
             connection.close()
             print("Conexion cerada")
 
-funciones.insertar_prueba_db('asdasd', -24)
-funciones.insertar_prueba_db('gyhtrh', -30)
+
+conexion = funciones()
+conexion.insertar_prueba_db('asdasd', -24)
+conexion.insertar_prueba_db('gyhtrh', -30)
 
