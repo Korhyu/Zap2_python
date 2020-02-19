@@ -1,68 +1,89 @@
-# RPi
 import time
 import paho.mqtt.client as mqtt
+from electric_data import electric_data
+
+class mqtt_obj():
+    def __init__(self):
+        cont = 0
+        vec_tension = []
+        vec_corriente = []
+        flag_v = False
+        flag_i = False
+
+    def connect_server(self, ip, puerto, tiempo):
+        self = mqtt.Client() 
+        self.on_connect = on_connect 
+        self.on_message = on_message 
+        self.connect(ip, puerto, tiempo)
+        self.client.loop_start()  
+
+    def connect_cliente(self, ip, puerto, tiempo):
+        self = mqtt.Client() 
+        self.on_connect = on_connect_cliente 
+        self.on_message = on_message 
+        self.connect(ip, puerto, tiempo)
+        self.client.loop_start()  
+
+    # Setup callback functions that are called when MQTT events happen like 
+    # connecting to the server or receiving data from a subscribed feed. 
+    def on_connect(self, client, userdata, flags, rc): 
+        print("Connected with result code " + str(rc)) 
+        # Subscribing in on_connect() means that if we lose the connection and 
+        # reconnect then subscriptions will be renewed. 
+        client.subscribe("/led")
+        client.subscribe("/test")
+        client.subscribe("/medicion/tension")
+        client.subscribe("/medicion/corriente")
+        client.subscribe("/medicion/f_sampl")
+        client.subscribe("/medicion/t_muest")
+        client.message_callback_add("/medicion/tension", on_message_tension)
+        client.message_callback_add("/medicion/corriente", on_message_corriente)
+        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+    
+    def on_connect_cliente(self, client, userdata, flags, rc): 
+        print("Connected with result code " + str(rc)) 
+
+        client.subscribe("/test")
+        client.subscribe("/config")
 
 
-#Cosas de la Rasp
-import RPi.GPIO as GPIO 
+    # The callback for when a PUBLISH message is received from the server. 
+    def on_message(self, client, userdata, msg): 
+        print(msg.topic + " " + str(msg.payload)) 
 
-# Configuration: 
-LED_PIN        = 24 
-BUTTON_PIN     = 23 
+    def on_message_tension(self, client, userdata, msg):
+        if float(msg.payload) is 9999:
+            self.flag_v = True
+            self.cont = 0
 
-# Initialize GPIO for LED and button. 
-GPIO.setmode(GPIO.BCM) 
-GPIO.setwarnings(False) 
-GPIO.setup(LED_PIN, GPIO.OUT) 
-GPIO.output(LED_PIN, GPIO.LOW) 
-GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+            if self.flag_v and self.flag_i is True:
+                self.flag_v = False
+                self.flag_i = False
+                datos = electric_data(self.vec_tension, self.vec_corriente)
 
+        else:
+            self.vec_tension.append(float(msg.payload))
+            self.cont = self.cont + 1
+ 
 
-# Setup callback functions that are called when MQTT events happen like 
-# connecting to the server or receiving data from a subscribed feed. 
-def on_connect(client, userdata, flags, rc): 
-   print("Connected with result code " + str(rc)) 
-   # Subscribing in on_connect() means that if we lose the connection and 
-   # reconnect then subscriptions will be renewed. 
-   client.subscribe("/led")
-   client.subscribe("/test")
-   client.subscribe("/medicion/tension")
-   client.subscribe("/medicion/corriente") 
+    def on_message_corriente(self, client, userdata, msg):
+        if float(msg.payload) is "999":
+            self.flag_i = True
+            self.cont = 0
 
-# The callback for when a PUBLISH message is received from the server. 
-def on_message(client, userdata, msg): 
-    print(msg.topic+" "+str( msg.payload)) 
-    # Check if this is a message for the Pi LED. 
-    if msg.topic == '/led': 
-        # Look at the message data and perform the appropriate action. 
-        if msg.payload == b'ON': 
-            GPIO.output(LED_PIN, GPIO.HIGH) 
-        elif msg.payload == b'OFF': 
-            GPIO.output(LED_PIN, GPIO.LOW) 
-        elif msg.payload == b'TOGGLE': 
-            GPIO.output(LED_PIN, not GPIO.input(LED_PIN))
+            if self.flag_v and self.flag_i is True:
+                self.flag_v = False
+                self.flag_i = False
+                datos = electric_data(self.vec_tension, self.vec_corriente)
+                datos.analize()
 
-    if msg.topic == '/test':
-        print('test') 
+        else:
+            self.vec_corriente.append(float(msg.payload))
+            self.cont = self.cont + 1
 
-    if msg.topic == '/medicion/tension':
-        print('Te falta hacer esto capo')
+    def on_message_f_sampl(self, client, userdata, msg):
+        electric_data.load_fs(float(msg.payload))
 
-    if msg.topic == '/medicion/corriente':
-        print('Te falta hacer esto capo')
-
-
-'''
-# Main loop to listen for button presses. 
-print('Script is running, press Ctrl-C to quit...') 
-while True: 
-    # Look for a change from high to low value on the button input to 
-    # signal a button press. 
-    button_first = GPIO.input(BUTTON_PIN) 
-    time.sleep(0.02)  # Delay for about 20 milliseconds to debounce. 
-    button_second = GPIO.input(BUTTON_PIN) 
-    if button_first == GPIO.HIGH and button_second == GPIO.LOW: 
-        print('Button pressed!') 
-        # Send a toggle message to the ESP8266 LED topic. 
-        client.publish('/leds/esp8266', 'TOGGLE')
-'''
+    def on_message_t_muest(self, client, userdata, msg):
+        electric_data.load_tm(float(msg.payload))
