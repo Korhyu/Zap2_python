@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+import datetime
 
 datos = ''' host='localhost',
             database='zap2',
@@ -41,7 +42,7 @@ class funcionesSQL:
             recordTuple = (instalacion, tipo_med, tiempo, valor)
             cursor.execute(mySql_insert_query, recordTuple)
             connection.commit()
-            print("Datos insertados en la tabla prueba")
+            print("Datos insertados en la tabla medicion")
 
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
@@ -52,5 +53,30 @@ class funcionesSQL:
                 connection.close()
                 print("Conexion cerada")
 
+    def insertar_timestamp_db(self, timestamp, uso_horario = None):
+        try:
+            connection = mysql.connector.connect( self.datos )
+            cursor = connection.cursor()
+            mySql_insert_query = """INSERT INTO tiempo (timestamp, uso_horario) VALUES (%s, %s) """
+            recordTuple = (timestamp, uso_horario)
+            cursor.execute(mySql_insert_query, recordTuple)
+            connection.commit()
+            mySql_insert_query = """SELECT MAX(id) FROM tiempo"""
+            cursor.execute(mySql_insert_query)
+            ultimo_id = cursor.fetchall()
+            print("Datos insertados en la tabla time")
 
-    
+        except mysql.connector.Error as error:
+            print("Error al insertar en la base de datos {}".format(error))
+
+        finally:
+            if (connection.is_connected()):
+                cursor.close()
+                connection.close()
+                print("Conexion cerada")
+                return ultimo_id
+
+    def get_hora(self):
+        fecha = str(datetime.datetime.now())
+        fecha = fecha[:19]
+        return fecha

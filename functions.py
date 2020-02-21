@@ -18,7 +18,7 @@ class funciones:
         pass
 
     def find_zero(self, vec, nz):
-        """Recive el vector (vec) y el numero de cero a encontrar (nz) y devuelve el indice del numero inmediato anterior al cero.
+        """Recibe el vector (vec) y el numero de cero a encontrar (nz) y devuelve el indice del numero inmediato anterior al cero.
         Cuenta cada "cero" cada vez que pasa desde negativo a positivo"""
         zf = 0
         for j in range(len(vec)):

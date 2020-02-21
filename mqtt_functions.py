@@ -68,7 +68,7 @@ class mqtt_obj():
  
 
     def on_message_corriente(self, client, userdata, msg):
-        if float(msg.payload) is "999":
+        if float(msg.payload) is 9999:
             self.flag_i = True
             self.cont = 0
 

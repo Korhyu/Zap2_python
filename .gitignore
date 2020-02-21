@@ -1,1 +1,6 @@
+# Carpetas
 __pycache__/
+
+
+# Extensiones
+*.pyc
