@@ -4,7 +4,7 @@ import numpy
 
 from scipy import signal
 
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
 '''
 to do
@@ -167,37 +167,6 @@ class funciones:
         print("Power Factor ", self.powfac)
         
 
-    def plot_data(self):
-        ts = self.ts
-        f = self.f
-        V = self.V
-        I = self.I
-        
-        indexV = self.v.index(max(self.v))
-        maxV = self.v[indexV]
-        indexI = self.i.index(max(self.i))
-        maxI = self.i[indexI]
-
-        plt.subplot(211)
-        plt.plot(self.t, self.v, 'r',label='Tension [V]')
-        plt.plot(self.t, self.i, 'b',label='Corriente [A]')
-        #plt.plot(self.t, self.ps, 'g', label='Pot. Apar. [kW]')
-        #plt.plot(self.t, self.pq, 'c', label='Pot. Reac. [kVAr]')
-        #plt.plot(self.t, self.pp, 'y', label='Pot. Actv. [kVA]')
-        #plt.plot(indexV*ts, maxV, 'mo',label='Max V')
-        #plt.plot(indexI*ts, maxI, 'ko',label='Max I')
-        plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
-        plt.xlabel('Tiempo [seg]')
-        plt.grid()
-        
-        plt.subplot(212)
-        plt.plot(f, V,'r',label='Tension [V]')
-        plt.plot(f, I,'b',label='Corriente [A]')
-        plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
-        plt.xlabel('Frecuencia [Hz]')
-        plt.grid()
-        plt.show()
-
     def design_filter(self, tipo, ripple_BP, frec_corte, sb_att, orden=None, plot=None):
         '''
         Devuelve los coeficientes del filtro especificado
@@ -241,13 +210,6 @@ class funciones:
             else:
                 self.b, self.a = signal.butter(orden, ripple_BP, frec_corte, 'low')
 
-        if plot is not None:
-            plt.plot(w, n)
-            plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
-            plt.xlabel('Frecuencia [Hz]')
-            plt.grid()
-            plt.show()
-
 
     def filtrado(self, vec):
         self.filt = signal.lfilter(self.b, self.a, vec)
@@ -257,7 +219,9 @@ class funciones:
 
         filtf = abs(numpy.fft.rfft(self.filt))
         filtf = filtf / len(filtf)
-        
+
+"""
+    def plot_filtrado(self, vec, vecf, filtf):
         plt.subplot(211)
         plt.plot(self.t, vec, 'b',label='Entrada')
         plt.plot(self.t, self.filt, 'r',label='Salida')
@@ -271,3 +235,36 @@ class funciones:
         plt.xlabel('Frecuencia [Hz]')
         plt.grid()
         plt.show()
+
+
+    def plot_data(self):
+        ts = self.ts
+        f = self.f
+        V = self.V
+        I = self.I
+        
+        indexV = self.v.index(max(self.v))
+        maxV = self.v[indexV]
+        indexI = self.i.index(max(self.i))
+        maxI = self.i[indexI]
+
+        plt.subplot(211)
+        plt.plot(self.t, self.v, 'r',label='Tension [V]')
+        plt.plot(self.t, self.i, 'b',label='Corriente [A]')
+        #plt.plot(self.t, self.ps, 'g', label='Pot. Apar. [kW]')
+        #plt.plot(self.t, self.pq, 'c', label='Pot. Reac. [kVAr]')
+        #plt.plot(self.t, self.pp, 'y', label='Pot. Actv. [kVA]')
+        #plt.plot(indexV*ts, maxV, 'mo',label='Max V')
+        #plt.plot(indexI*ts, maxI, 'ko',label='Max I')
+        plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
+        plt.xlabel('Tiempo [seg]')
+        plt.grid()
+        
+        plt.subplot(212)
+        plt.plot(f, V,'r',label='Tension [V]')
+        plt.plot(f, I,'b',label='Corriente [A]')
+        plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
+        plt.xlabel('Frecuencia [Hz]')
+        plt.grid()
+        plt.show()
+"""
