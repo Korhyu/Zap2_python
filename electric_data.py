@@ -1,9 +1,10 @@
 import math
 from functions import funciones
 from scipy import signal
-from mqtt_functions import mqtt_obj
 
-from matplotlib import pyplot as plt
+
+#from mqtt_functions import mqtt_obj
+#from matplotlib import pyplot as plt
 
 
 class electric_data(funciones):
