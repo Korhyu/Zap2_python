@@ -10,7 +10,32 @@ datos = ''' host='localhost',
 
 class funcionesSQL:
     def __init__ (self):
+
+        datos = ''' host='localhost',
+                    database='zap2',
+                    user='zap2app',
+                    password='zap2app' '''
+
         pass
+
+    def test_db_conn(self):
+        try:
+            if self.is_connected():
+                db_Info = self.get_server_info()
+                print("Connected to MySQL Server version ", db_Info)
+                cursor = self.cursor()
+                cursor.execute("select database();")
+                record = cursor.fetchone()
+                print("You're connected to database: ", record)
+
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+
+        finally:
+            if (self.is_connected()):
+                cursor.close()
+                self.close()
+                print("MySQL connection is closed")
 
     def insertar_prueba_db(self, cadena, valor):
         try:

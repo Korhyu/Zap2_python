@@ -29,13 +29,14 @@ class mqtt_obj():
     def on_connect(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
         # Subscribing in on_connect() means that if we lose the connection and 
-        # reconnect then subscriptions will be renewed. 
-        client.subscribe("/led")
-        client.subscribe("/test")
-        client.subscribe("/medicion/tension")
-        client.subscribe("/medicion/corriente")
-        client.subscribe("/medicion/f_sampl")
-        client.subscribe("/medicion/t_muest")
+        # reconnect then subscriptions will be renewed.
+        MQTT_TOPICS = [ ("/test", 0),
+                        ("/medicion/tension", 0),
+                        ("/medicion/corriente", 0),
+                        ("/config/f_sampl", 0),
+                        ("/config/t_muest", 0)]
+
+        client.subscribe(MQTT_TOPICS)
         client.message_callback_add("/medicion/tension", on_message_tension)
         client.message_callback_add("/medicion/corriente", on_message_corriente)
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
@@ -45,7 +46,8 @@ class mqtt_obj():
         print("Connected with result code " + str(rc)) 
 
         client.subscribe("/test")
-        client.subscribe("/config")
+        client.subscribe("/config/f_sampl")
+        client.subscribe("/config/t_muest")
 
 
     # The callback for when a PUBLISH message is received from the server. 
