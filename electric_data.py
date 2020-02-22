@@ -1,7 +1,7 @@
 import math
 from functions import funciones
 from scipy import signal
-from mqtt_functions import mqtt_data
+from mqtt_functions import mqtt_obj
 
 from matplotlib import pyplot as plt
 
