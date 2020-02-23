@@ -109,4 +109,4 @@ client.on_message = on_message
 
 print("Script is running, press Ctrl-C to quit...") 
 while True:
-    time.sleep(5)
+    #time.sleep(5)
