@@ -59,9 +59,13 @@ def lec_callback(client, userdata, message):
         for (id, entero, coma, cadena) in cursor:
             print("DATOs: {}, {}, {}, {}".format(id, entero, coma, cadena) )
 
+def pub(topic, value):
+    mqttclient.publish(topic, value, 0, True)
+
+
 mqttclient.message_callback_add("esc", esc_callback)
 mqttclient.message_callback_add("lec", lec_callback)
 
-
-def pub(topic, value):
-    mqttclient.publish(topic, value, 0, True)
+print("Script is running, press Ctrl-C to quit...") 
+while True:
+    pass
