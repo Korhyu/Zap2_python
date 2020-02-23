@@ -97,10 +97,10 @@ finally:
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
 client = mqtt.Client() 
-client.on_connect = on_connect 
-client.on_message = on_message 
 client.connect("localhost", 1883, 60)  
-client.loop_start() 
+client.loop_start()
+client.on_connect = on_connect 
+client.on_message = on_message
  
 
 print("Script is running, press Ctrl-C to quit...") 

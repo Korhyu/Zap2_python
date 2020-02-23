@@ -39,34 +39,9 @@ client.loop_start()
 # Main loop to listen for button presses. 
 print('Script is running, press Ctrl-C to quit...') 
 while True:
-    num = random.randint(1,101)
-
-    print('publicando el numero ' + str(num))
-    client.publish(topic='esc', payload=num, qos=0, retain=False)
+    
     time.sleep(5)
 
-
-'''
-operacion = input('Ingrese la operacion a realizar: ')
-    if operacion != 4:
-        num1 = input('Ingrese el primer numero:  ')
-        num2 = input('Ingrese el segundo numero: ')
-
-        if operacion == 1:
-            client.publish('/suma', num1)
-            client.publish('/suma', num2)
-        
-        elif operacion == 2:
-            client.publish('/resta', num1)
-            client.publish('/resta', num2)
-
-        elif operacion == 3:
-            client.publish('/promedio', num1)
-            client.publish('/promedio', num2)
-
-        else:
-            print("Ingrese un caracter valido \n\t'1' para sumar \n\t'2' para restar \n\t'3' para promediar \n\t'4' para leer la base")
-
-    else:
-        client.publish('/completo')
-'''
+    num = random.randint(1,101)
+    print('publicando el numero ' + str(num))
+    client.publish(topic='esc', payload=num, qos=0, retain=False)
