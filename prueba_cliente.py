@@ -44,4 +44,4 @@ while True:
 
     num = random.randint(1,101)
     print('publicando el numero ' + str(num))
-    client.publish(topic='esc', payload=num, qos=0, retain=False)
+    client.publish(topic='esc/', payload=num, qos=0, retain=False)

@@ -22,10 +22,13 @@ mqttclient.connect(broker, port, 60)
 mqttclient.loop_start()
 mqttclient.subscribe(MQTT_TOPICS)
 
+mqttclient.message_callback_add("esc", esc_callback)
+mqttclient.message_callback_add("lec", lec_callback)
+
 def esc_callback(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
         + message.topic + "' with QoS " + str(message.qos))
-    
+    '''
     try:
         cur = db.cursor()
         instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', %f)"""
@@ -39,12 +42,14 @@ def esc_callback(client, userdata, message):
     finally:
         print("Dato almacenado")
         cur.close()
+    '''
 
 
 def lec_callback(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
         + message.topic + "' with QoS " + str(message.qos))
     
+    '''
     try:
         cur = db.cursor()
         instruccion = """SELECT `*` FROM `prueba`"""
@@ -58,13 +63,13 @@ def lec_callback(client, userdata, message):
     finally:
         for (id, entero, coma, cadena) in cursor:
             print("DATOs: {}, {}, {}, {}".format(id, entero, coma, cadena) )
+    '''
 
 def pub(topic, value):
     mqttclient.publish(topic, value, 0, True)
 
 
-mqttclient.message_callback_add("esc", esc_callback)
-mqttclient.message_callback_add("lec", lec_callback)
+
 
 print("Script is running, press Ctrl-C to quit...") 
 while True:
