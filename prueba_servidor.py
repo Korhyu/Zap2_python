@@ -23,12 +23,14 @@ db = mysql.connector.connect(   host="localhost",
 def on_connect(client, userdata, flags, rc): 
     print("Connected with result code " + str(rc))
     
+    client.message_callback_add("esc", on_message_esc)
+    client.message_callback_add("lec", on_message_lec)
+    
     MQTT_TOPICS = [ ("/lec", 0),
                     ("/esc", 0)]
 
     client.subscribe(MQTT_TOPICS)
-    client.message_callback_add("esc", on_message_esc)
-    client.message_callback_add("lec", on_message_lec)
+    
 
 
 #funcion de escritura de db
@@ -97,10 +99,12 @@ finally:
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
 client = mqtt.Client() 
-client.connect("localhost", 1883, 60)  
+client.connect("localhost", 1883, 60)
 client.loop_start()
 client.on_connect = on_connect 
 client.on_message = on_message
+
+
  
 
 print("Script is running, press Ctrl-C to quit...") 
