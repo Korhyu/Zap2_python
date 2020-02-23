@@ -14,16 +14,6 @@ port = 1883;
 MQTT_TOPICS = [ ("/lec", 0),
                 ("/esc", 0)];
 
-mypid = os.getpid()
-client_uniq = "pubclient_"+str(mypid)
-mqttclient = paho.Client(client_uniq, False) #nocleanstart
-mqttclient.connect(broker, port, 60)
-
-mqttclient.loop_start()
-mqttclient.subscribe(MQTT_TOPICS)
-
-mqttclient.message_callback_add("esc", esc_callback)
-mqttclient.message_callback_add("lec", lec_callback)
 
 def esc_callback(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
@@ -70,6 +60,19 @@ def pub(topic, value):
 
 
 
+
+
+
+mypid = os.getpid()
+client_uniq = "pubclient_"+str(mypid)
+mqttclient = paho.Client(client_uniq, False) #nocleanstart
+mqttclient.connect(broker, port, 60)
+
+mqttclient.loop_start()
+mqttclient.subscribe(MQTT_TOPICS)
+
+mqttclient.message_callback_add("esc", esc_callback)
+mqttclient.message_callback_add("lec", lec_callback)
 
 print("Script is running, press Ctrl-C to quit...") 
 while True:
