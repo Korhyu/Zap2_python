@@ -33,7 +33,7 @@ def on_message(client, userdata, msg):
 client = mqtt.Client() 
 client.on_connect = on_connect 
 client.on_message = on_message 
-client.connect('192.168.0.21', 1883, 60) 
+client.connect('192.168.0.28', 1883, 60) 
 # Connect to the MQTT server and process messages in a background thread. 
 client.loop_start() 
 # Main loop to listen for button presses. 

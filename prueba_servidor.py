@@ -4,7 +4,7 @@ import time
 import paho.mqtt.client as mqtt
 import mysql.connector
 from mysql.connector import Error
-from sql_functions import insertar_prueba_db
+#from sql_functions import insertar_prueba_db
 
 
 # RPi
@@ -36,7 +36,7 @@ def on_message_esc(client, userdata, msg):
     try:
         cur = db.cursor()
         instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', %f)"""
-        datos = float(msg.payload)
+        datos = float(msg.payload.decode("utf-8"))
         print("QUERY: " + instruccion + "datos " + datos)
         cur.execute(instruccion, datos)
 
