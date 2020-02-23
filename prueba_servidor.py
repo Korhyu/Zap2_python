@@ -33,6 +33,7 @@ def on_connect(client, userdata, flags, rc):
 
 #funcion de escritura de db
 def on_message_esc(client, userdata, msg):
+    print("mensaje recibido")
     try:
         cur = db.cursor()
         instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', %f)"""
