@@ -35,6 +35,7 @@ def on_connect(client, userdata, flags, rc):
 
 #funcion de escritura de db
 def on_message_esc(client, userdata, msg):
+<<<<<<< HEAD
     print("mensaje recibido")
     try:
         cur = db.cursor()
@@ -49,6 +50,12 @@ def on_message_esc(client, userdata, msg):
     finally:
         print("Dato almacenado")
         cur.close()
+=======
+    cur = db.cursor()
+    comando = "INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test'," + str(msg.payload) + ")"
+    print("QUERY: " + comando)
+    cur.execute(comando)
+>>>>>>> parent of 2be4dbe... Continua el trabajo sobre "prueba_..."
 
 
 # Funcion de lectura de db
