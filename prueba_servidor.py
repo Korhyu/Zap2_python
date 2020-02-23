@@ -1,27 +1,16 @@
 #SQL
-import mysql.connector
-from mysql.connector import Error
-from Zap2_python.sql_functions import insertar
-
-# RPi
+import re
 import time
 import paho.mqtt.client as mqtt
+import mysql.connector
+from mysql.connector import Error
+from sql_functions import insertar_prueba_db
 
-import re
 
-#Cosas de la Rasp
-import RPi.GPIO as GPIO 
+# RPi
+import RPi.GPIO as GPIO
 
-# Configuration: 
-LED_PIN        = 24 
-BUTTON_PIN     = 23 
 
-# Initialize GPIO for LED and button. 
-GPIO.setmode(GPIO.BCM) 
-GPIO.setwarnings(False) 
-GPIO.setup(LED_PIN, GPIO.OUT) 
-GPIO.output(LED_PIN, GPIO.LOW) 
-GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
 
 
 # Datos de la base de datos
@@ -32,10 +21,12 @@ db = mysql.connector.connect(   host="localhost",
 
 # Funcion que se ejecuta en la conexion
 def on_connect(client, userdata, flags, rc): 
-    print("Connected with result code " + str(rc)) 
+    print("Connected with result code " + str(rc))
+    
+    MQTT_TOPICS = [ ("/lec", 0),
+                    ("/esc", 0)]
 
-    client.subscribe("esc", qos=0)
-    client.subscribe("lec", qos=0)
+    client.subscribe(MQTT_TOPICS)
     client.message_callback_add("esc", on_message_esc)
     client.message_callback_add("lec", on_message_lec)
 
@@ -48,18 +39,30 @@ def on_message_esc(client, userdata, msg):
         datos = float(msg.payload)
         print("QUERY: " + instruccion + "datos " + datos)
         cur.execute(instruccion, datos)
-        cur.close()
 
     except Error as e:
         print("Error while connecting to MySQL", e)
 
     finally:
         print("Dato almacenado")
+        cur.close()
 
 
 # Funcion de lectura de db
 def on_message_lec(client, userdata, msg):
-    print("todavia nada")
+    try:
+        cur = db.cursor()
+        instruccion = """SELECT `*` FROM `prueba`"""
+        print("QUERY: " + instruccion)
+        cursor.execute(instruccion)
+        cur.close()
+
+    except Error as e:
+        print("Error while connecting to MySQL", e)
+
+    finally:
+        for (id, entero, coma, cadena) in cursor:
+            print("DATOs: {}, {}, {}, {}".format(id, entero, coma, cadena) )
 
 
 # The callback for when a PUBLISH message is received from the server. 
@@ -101,4 +104,4 @@ client.loop_start()
 
 print("Script is running, press Ctrl-C to quit...") 
 while True:
-    
+    time.sleep(5)

@@ -43,7 +43,7 @@ while True:
 
     print('publicando el numero ' + str(num))
     client.publish(topic='esc', payload=num, qos=0, retain=False)
-    time.sleep(3)
+    time.sleep(5)
 
 
 '''

@@ -45,6 +45,11 @@ class electric_data(funciones):
         self.b = []                             #Componentes del filtro
         self.filt = []                          #Senal Filtrada
     
+    def __init__(self, ts, tm):
+        self.ts = ts
+        self.tm = tm
+        self.tfin = math.ceil(tm / ts)
+
     def gen_data(self, arm_div = None, arm_freq = None):  
         if arm_div is not None and arm_freq is not None:
             self.generate_signal(arm_div, arm_freq)
