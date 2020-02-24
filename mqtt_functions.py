@@ -4,8 +4,10 @@ from electric_data import electric_data
 
 class mqtt_obj():
     def __init__(self):
+        print("Creando mqtt")
         data = electric_data
         conn = mqtt.Client()
+        print("Creado...")
 
     def on_connect_server(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
