@@ -18,7 +18,7 @@ MQTT_TOPICS = [ ("/lec", 0),
 def esc_callback(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
         + message.topic + "' with QoS " + str(message.qos))
-    '''
+
     try:
         cur = db.cursor()
         instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', %f)"""
@@ -32,14 +32,13 @@ def esc_callback(client, userdata, message):
     finally:
         print("Dato almacenado")
         cur.close()
-    '''
+
 
 
 def lec_callback(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
         + message.topic + "' with QoS " + str(message.qos))
     
-    '''
     try:
         cur = db.cursor()
         instruccion = """SELECT `*` FROM `prueba`"""
@@ -53,7 +52,8 @@ def lec_callback(client, userdata, message):
     finally:
         for (id, entero, coma, cadena) in cursor:
             print("DATOs: {}, {}, {}, {}".format(id, entero, coma, cadena) )
-    '''
+
+
 
 def pub(topic, value):
     mqttclient.publish(topic, value, 0, True)
