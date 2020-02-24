@@ -21,8 +21,9 @@ if __name__ == "__main__":
     obj_mqtt = mqtt_obj()
     obj_sql = funcionesSQL()
 
-    datos = obj_mqtt.data
-    datos.load_time(ts, tm)
+    datos = electric_data(ts, tm)
+    obj_mqtt.data = datos
+    
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     server = obj_mqtt.connect_server('localhost', 1883, 60)
