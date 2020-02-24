@@ -14,7 +14,7 @@ if __name__ == "__main__":
     print("punto 0")
 
     tm = 2                      #Tiempo de muestreo
-    fs = 40000                  #Frecuencia de muestreo
+    fs = 20000                  #Frecuencia de muestreo
     ts = float(1/fs)            #Periodo de muestreo
 
     vec_tension = [0] * math.ceil(tm / ts)

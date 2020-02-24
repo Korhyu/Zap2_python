@@ -12,14 +12,18 @@ from mqtt_functions import mqtt_obj
 conexion = mqtt_obj()
 conexion.connect_cliente('192.168.0.28', 1883, 60)
 
+fs = 20000
+ts = 2
+vp = 311
+
 while True:
-    time.sleep(10)
+    time.sleep(1)
 
     conexion.publish(topic='test', payload='sim cliente', qos=0, retain=False)
 
-    for j in 40000:
-        n = 0.01 * random.randint(-101,101)
-        num = 311 * math.sin(2*math.pi*50*50e-6 * j) + n
+    for j in (fs * ts):
+        n = 0.01 * random.randint(-100,100)
+        num = vp * math.sin(2*math.pi*50*(1/fs)* j) + n * vp
         conexion.publish(topic='medicion/tension', payload=num, qos=0, retain=False)
    
     conexion.publish(topic='medicion/tension', payload=9999, qos=0, retain=False)
