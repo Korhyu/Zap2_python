@@ -22,7 +22,7 @@ class mqtt_obj():
         client.message_callback_add("/test", on_message_test)
 
     def suscribe(self, client): 
-        print("Connected with result code " + str(rc)) 
+        print("Connected") 
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
                         ("/medicion/corriente", 0),
