@@ -15,9 +15,9 @@ client.on_message=on_message        #attach function to callback
 print("connecting to broker")
 client.connect(broker_address)      #connect to broker
 client.loop_start()                 #start the loop
-print("Subscribing to topic","house/bulbs/bulb1")
-client.subscribe("esc")
+print("Subscribing to topic","esc")
+client.subscribe("/esc")
 print("Publishing message to topic","esc")
-client.publish("esc","OFF")
+client.publish("/esc","OFF")
 time.sleep(4)                       # wait
 client.loop_stop()                  #stop the loop
