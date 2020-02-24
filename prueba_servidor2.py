@@ -30,7 +30,7 @@ def esc_callback(client, userdata, message):
     try:
         cur = db.cursor()
         instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', %f)"""
-        datos = float(msg.payload.decode("utf-8"))
+        datos = float(message.payload.decode("utf-8"))
         print("QUERY: " + instruccion + "datos " + datos)
         cur.execute(instruccion, datos)
         print("Dato almacenado")
@@ -51,14 +51,14 @@ def lec_callback(client, userdata, message):
         cur = db.cursor()
         instruccion = """SELECT `*` FROM `prueba`"""
         print("QUERY: " + instruccion)
-        cursor.execute(instruccion)
+        cur.execute(instruccion)
         cur.close()
 
     except Error as e:
         print("Error while connecting to MySQL", e)
 
     finally:
-        for (id, entero, coma, cadena) in cursor:
+        for (id, entero, coma, cadena) in cur:
             print("DATOs: {}, {}, {}, {}".format(id, entero, coma, cadena) )
 
 
