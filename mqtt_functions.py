@@ -6,18 +6,7 @@ class mqtt_obj():
     def __init__(self):
         data = electric_data
         client = mqtt.Client()
-        MQTT_TOPICS = [ ("/test", 0),
-                        ("/medicion/tension", 0),
-                        ("/medicion/corriente", 0),
-                        ("/config/f_sampl", 0),
-                        ("/config/t_muest", 0)]
-
-        client.subscribe(MQTT_TOPICS)
-        client.message_callback_add("/medicion/tension", on_message_tension)
-        client.message_callback_add("/medicion/corriente", on_message_corriente)
-        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
-        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
-        client.message_callback_add("/test", on_message_test)
+        
 
     def on_connect(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
@@ -33,6 +22,20 @@ class mqtt_obj():
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)"""
+
+    def suscribe(self, client):
+        MQTT_TOPICS = [ ("/test", 0),
+                        ("/medicion/tension", 0),
+                        ("/medicion/corriente", 0),
+                        ("/config/f_sampl", 0),
+                        ("/config/t_muest", 0)]
+
+        client.subscribe(MQTT_TOPICS)
+        client.message_callback_add("/medicion/tension", on_message_tension)
+        client.message_callback_add("/medicion/corriente", on_message_corriente)
+        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+        client.message_callback_add("/test", on_message_test)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -84,6 +87,7 @@ class mqtt_obj():
     def connect_server(self, ip, puerto, tiempo):
         self.client.on_connect = self.on_connect 
         self.client.on_message = self.on_message
+        self.suscribe(self.client)
         self.client.connect(ip, puerto, tiempo)
         self.client.loop_start()
         return self.client
