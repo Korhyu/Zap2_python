@@ -39,7 +39,6 @@ if __name__ == "__main__":
 
     while True:
 
-        print("punto 3")
         if flag_v and flag_i is True:
             flag_v = False
             flag_i = False
