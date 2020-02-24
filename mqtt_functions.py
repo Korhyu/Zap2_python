@@ -37,6 +37,7 @@ class mqtt_obj():
         print(msg.topic + " " + str(msg.payload)) 
 
     def on_message_tension(self, client, userdata, msg):
+        print("msj atencion")
         try:
             valor = float(msg.payload)
             self.data.vec_tension.append()
