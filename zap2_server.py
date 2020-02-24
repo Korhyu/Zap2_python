@@ -11,8 +11,6 @@ if __name__ == "__main__":
     flag_v = False
     flag_i = False
 
-    print("punto 0")
-
     tm = 2                      #Tiempo de muestreo
     fs = 20000                  #Frecuencia de muestreo
     ts = float(1/fs)            #Periodo de muestreo
@@ -20,22 +18,18 @@ if __name__ == "__main__":
     vec_tension = [0] * math.ceil(tm / ts)
     vec_corriente = [0] * math.ceil(tm / ts)
 
-    datos = electric_data(ts, tm)
-
-    print("punto 1")
-
     obj_mqtt = mqtt_obj()
     obj_sql = funcionesSQL()
+
+    datos = obj_mqtt.data
+    datos.load_time(ts, tm)
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     server = obj_mqtt.connect_server('localhost', 1883, 60)
 
-    print("punto 1.5")
-
     # Pruebo la conexion a la db
     #obj_sql.test_db_conn()
 
-    print("punto 2")
 
     while True:
         if flag_v and flag_i is True:
@@ -44,39 +38,11 @@ if __name__ == "__main__":
             datos.analize()
 
 
-def on_message_tension(client, userdata, msg, datos):
-    try:
-        valor = float(msg.payload)
-        datos.vec_tension.append()
-        print(str(valor) + " [V]")
-        cont = cont + 1
-                    
-    except ValueError:
-        print("Fin de vector")
-        flag_v = True
-        cont = 0
 
 
-def on_message_corriente(client, userdata, msg, datos):
-    try:
-        valor = float(msg.payload)
-        datos.vec_corriente.append()
-        print(str(valor) + " [A]")
-        cont = cont + 1      
-
-    except ValueError:
-        print("Fin de vector")
-        flag_i = True
-        cont = 0 
-        
 
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
 def on_message_t_muest(self, client, userdata, msg):
     electric_data.load_tm(float(msg.payload))
-
-
-
-
-
