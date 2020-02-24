@@ -21,7 +21,7 @@ if __name__ == "__main__":
     obj_mqtt = mqtt_obj()
     obj_sql = funcionesSQL()
 
-    datos = electric_data(ts, tm)
+    datos = electric_data(ts, tm)   #Cargo los datos
     obj_mqtt.data = datos
     
 
