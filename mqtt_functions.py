@@ -4,11 +4,7 @@ from electric_data import electric_data
 
 class mqtt_obj():
     def __init__(self):
-        cont = 0
-        vec_tension = []
-        vec_corriente = []
-        flag_v = False
-        flag_i = False
+        pass
 
     def connect_server(self, ip, puerto, tiempo):
         self = mqtt.Client() 
@@ -24,12 +20,9 @@ class mqtt_obj():
         self.connect(ip, puerto, tiempo)
         self.client.loop_start()  
 
-    # Setup callback functions that are called when MQTT events happen like 
-    # connecting to the server or receiving data from a subscribed feed. 
+
     def on_connect(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
-        # Subscribing in on_connect() means that if we lose the connection and 
-        # reconnect then subscriptions will be renewed.
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
                         ("/medicion/corriente", 0),
@@ -42,6 +35,7 @@ class mqtt_obj():
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
     
+
     def on_connect_cliente(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
 

@@ -16,9 +16,9 @@ class electric_data(funciones):
         self.ai = ai
         self.phi = phi
 
-        self.v = [0] * self.tfin                #Vector de tension
-        self.i = [0] * self.tfin                #Vector de corriente
-        self.t = [0] * self.tfin                #Vector de tiempo
+        self.v = []                             #Vector de tension
+        self.i = []                             #Vector de corriente
+        self.t = []                             #Vector de tiempo
 
         self.pp = [0] * self.tfin               #Potencia activa
         self.pq = [0] * self.tfin               #Potencia reactiva
