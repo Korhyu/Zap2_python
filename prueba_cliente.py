@@ -42,6 +42,6 @@ while True:
     
     time.sleep(5)
 
-    num = random.randint(1,101)
+    num = random.randint(1,100) / 10
     print('publicando el numero ' + str(num))
     client.publish(topic='/esc', payload=num, qos=0, retain=False)
