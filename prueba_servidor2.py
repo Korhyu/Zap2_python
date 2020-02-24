@@ -31,6 +31,7 @@ def esc_callback(client, userdata, message):
         cur = db.cursor()
         instruccion = "INSERT INTO 'prueba'('cadena', 'coma') VALUES ('test', %s)"
         datos = message.payload.decode("utf-8")
+        print(type(datos))
         print("QUERY: " + instruccion % datos)
         cur.execute(instruccion, datos)
         cur.commit()
