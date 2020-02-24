@@ -34,7 +34,7 @@ def esc_callback(client, userdata, message):
         instruccion = instruccion % datos
         print("QUERY: " + instruccion)
         cur.execute(instruccion)
-        cur.commit()
+        db.commit()
         print("Dato almacenado")
 
     except Error as e:
