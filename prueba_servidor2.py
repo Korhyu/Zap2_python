@@ -29,9 +29,9 @@ def esc_callback(client, userdata, message):
 
     try:
         cur = db.cursor()
-        instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', """ + message.payload.decode("utf-8") + """)"""
+        instruccion = """INSERT INTO `prueba`(`cadena`, `coma`) VALUES ('test', '""" + message.payload.decode("utf-8") + """')"""
         datos = message.payload.decode("utf-8")
-        print("QUERY: " + instruccion + "datos " + datos)
+        print("QUERY: " + instruccion)
         cur.execute(instruccion)
         print("Dato almacenado")
 
