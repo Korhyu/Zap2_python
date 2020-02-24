@@ -6,7 +6,6 @@ class mqtt_obj():
     def __init__(self):
         data = electric_data
         client = mqtt.Client()
-        
 
     def on_connect_server(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
@@ -71,11 +70,10 @@ class mqtt_obj():
         electric_data.load_tm(float(msg.payload))
 
     def connect_server(self, ip, puerto, tiempo):
-        self = mqtt.Client()
-        self.on_connect = self.on_connect_server 
-        self.on_message = self.on_message_server
-        self.connect(ip, puerto, tiempo)
-        self.loop_start()
+        self.client.on_connect = self.on_connect_server 
+        self.client.on_message = self.on_message_server
+        self.client.connect(ip, puerto, tiempo)
+        self.client.loop_start()
         return self.client
 
     def connect_cliente(self, ip, puerto, tiempo):
