@@ -49,7 +49,8 @@ class mqtt_obj():
 
 
     def on_message_server(self, client, userdata, msg): 
-        print(msg.topic + " " + str(msg.payload)) 
+        #print(msg.topic + " " + str(msg.payload))
+        pass
 
 
     def on_message_tension(self, client, userdata, msg):

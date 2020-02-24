@@ -12,7 +12,7 @@ if __name__ == "__main__":
     flag_i = False
 
     tm = 2                      #Tiempo de muestreo
-    fs = 10000                  #Frecuencia de muestreo
+    fs = 1000                   #Frecuencia de muestreo
     ts = float(1/fs)            #Periodo de muestreo
 
     vec_tension = [0] * math.ceil(tm / ts)
