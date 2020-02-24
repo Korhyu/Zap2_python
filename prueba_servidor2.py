@@ -70,8 +70,8 @@ mqttclient.connect(broker, port, 60)
 mqttclient.loop_start()
 mqttclient.subscribe(MQTT_TOPICS)
 
-mqttclient.message_callback_add("esc", esc_callback)
-mqttclient.message_callback_add("lec", lec_callback)
+mqttclient.message_callback_add("/esc", esc_callback)
+mqttclient.message_callback_add("/lec", lec_callback)
 
 print("Script is running, press Ctrl-C to quit...") 
 while True:
