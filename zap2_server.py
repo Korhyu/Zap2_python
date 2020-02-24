@@ -34,6 +34,7 @@ if __name__ == "__main__":
 
     while True:
         if flag_v and flag_i is True:
+            print("Vectores recividos, comienza analisis...")
             flag_v = False
             flag_i = False
             datos.analize()
