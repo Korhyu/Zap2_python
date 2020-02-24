@@ -5,6 +5,7 @@ from electric_data import electric_data
 class mqtt_obj():
     def __init__(self):
         data = electric_data
+        client = mqtt.Client()
 
     def on_connect(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
@@ -21,7 +22,7 @@ class mqtt_obj():
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
 
-    def suscribe(self, client): 
+    def suscribe(self): 
         print("Connected") 
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
@@ -29,12 +30,12 @@ class mqtt_obj():
                         ("/config/f_sampl", 0),
                         ("/config/t_muest", 0)]
 
-        client.subscribe(MQTT_TOPICS)
-        client.message_callback_add("/medicion/tension", on_message_tension)
-        client.message_callback_add("/medicion/corriente", on_message_corriente)
-        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
-        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
-        client.message_callback_add("/test", on_message_test)
+        self.client.subscribe(MQTT_TOPICS)
+        self.client.message_callback_add("/medicion/tension", on_message_tension)
+        self.client.message_callback_add("/medicion/corriente", on_message_corriente)
+        self.client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        self.client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+        self.client.message_callback_add("/test", on_message_test)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -84,13 +85,12 @@ class mqtt_obj():
         electric_data.load_tm(float(msg.payload))
 
     def connect_server(self, ip, puerto, tiempo):
-        client = mqtt.Client() 
-        client.on_connect = self.on_connect 
-        client.on_message = self.on_message
-        self.suscribe(client)
-        client.connect(ip, puerto, tiempo)
-        client.loop_start()
-        return client
+        self.client.on_connect = self.on_connect 
+        self.client.on_message = self.on_message
+        self.suscribe()
+        self.client.connect(ip, puerto, tiempo)
+        self.client.loop_start()
+        return self.client
 
     def connect_cliente(self, ip, puerto, tiempo):
         self = mqtt.Client() 
