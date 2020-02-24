@@ -21,7 +21,7 @@ class mqtt_obj():
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
 
-    def suscribe(self): 
+    def suscribe(self, client): 
         print("Connected") 
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
@@ -29,12 +29,12 @@ class mqtt_obj():
                         ("/config/f_sampl", 0),
                         ("/config/t_muest", 0)]
 
-        self.subscribe(MQTT_TOPICS)
-        self.message_callback_add("/medicion/tension", on_message_tension)
-        self.message_callback_add("/medicion/corriente", on_message_corriente)
-        self.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
-        self.message_callback_add("/medicion/t_muest", on_message_t_muest)
-        self.message_callback_add("/test", on_message_test)
+        client.subscribe(MQTT_TOPICS)
+        client.message_callback_add("/medicion/tension", on_message_tension)
+        client.message_callback_add("/medicion/corriente", on_message_corriente)
+        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+        client.message_callback_add("/test", on_message_test)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -84,13 +84,13 @@ class mqtt_obj():
         electric_data.load_tm(float(msg.payload))
 
     def connect_server(self, ip, puerto, tiempo):
-        self = mqtt.Client() 
-        self.on_connect = self.on_connect 
-        self.on_message = self.on_message
-        self.suscribe()
-        self.connect(ip, puerto, tiempo)
-        self.loop_start()
-        return self
+        client = mqtt.Client() 
+        client.on_connect = self.on_connect 
+        client.on_message = self.on_message
+        self.suscribe(client)
+        client.connect(ip, puerto, tiempo)
+        client.loop_start()
+        return client
 
     def connect_cliente(self, ip, puerto, tiempo):
         self = mqtt.Client() 
