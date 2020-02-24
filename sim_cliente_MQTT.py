@@ -19,12 +19,12 @@ vp = 311
 while True:
     time.sleep(1)
 
-    server.publish(topic='test', payload='sim cliente', qos=0, retain=False)
+    server.publish(topic='/test', payload='sim cliente', qos=0, retain=False)
     print("Empienza el envio de datos")
 
     for j in range(fs * ts):
         n = 0.01 * random.randint(-100,100)
         num = vp * math.sin(2*math.pi*50*(1/fs)* j) + n * vp
-        server.publish(topic='medicion/tension', payload=num, qos=0, retain=False)
+        server.publish(topic='/medicion/tension', payload=num, qos=0, retain=False)
    
-    server.publish(topic='medicion/tension', payload=9999, qos=0, retain=False)
+    server.publish(topic='/medicion/tension', payload=9999, qos=0, retain=False)
