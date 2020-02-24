@@ -33,7 +33,7 @@ if __name__ == "__main__":
     print("punto 1.5")
 
     # Pruebo la conexion a la db
-    obj_sql.test_db_conn()
+    #obj_sql.test_db_conn()
 
     print("punto 2")
 
