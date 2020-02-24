@@ -20,6 +20,21 @@ class mqtt_obj():
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
+
+    def suscribe(self, client): 
+        print("Connected with result code " + str(rc)) 
+        MQTT_TOPICS = [ ("/test", 0),
+                        ("/medicion/tension", 0),
+                        ("/medicion/corriente", 0),
+                        ("/config/f_sampl", 0),
+                        ("/config/t_muest", 0)]
+
+        client.subscribe(MQTT_TOPICS)
+        client.message_callback_add("/medicion/tension", on_message_tension)
+        client.message_callback_add("/medicion/corriente", on_message_corriente)
+        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+        client.message_callback_add("/test", on_message_test)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -72,8 +87,7 @@ class mqtt_obj():
         self = mqtt.Client() 
         self.on_connect = self.on_connect 
         self.on_message = self.on_message
-        self.on_connect()
-
+        self.suscribe()
         self.connect(ip, puerto, tiempo)
         self.loop_start()
         return self
@@ -82,8 +96,6 @@ class mqtt_obj():
         self = mqtt.Client() 
         self.on_connect = on_connect_cliente 
         self.on_message = on_message
-        self.on_connect()
-        
         self.connect(ip, puerto, tiempo)
         self.loop_start()
         return self
