@@ -74,11 +74,11 @@ class mqtt_obj():
         self.on_connect = self.on_connect 
         self.on_message = self.on_message 
         self.connect(ip, puerto, tiempo)
-        self.client.loop_start()  
+        self.loop_start()  
 
     def connect_cliente(self, ip, puerto, tiempo):
         self = mqtt.Client() 
         self.on_connect = on_connect_cliente 
         self.on_message = on_message 
         self.connect(ip, puerto, tiempo)
-        self.client.loop_start()  
+        self.loop_start()  
