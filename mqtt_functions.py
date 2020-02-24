@@ -8,22 +8,8 @@ class mqtt_obj():
         client = mqtt.Client()
         
 
-    def on_connect(self, client, userdata, flags, rc): 
+    def on_connect_server(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
-        """MQTT_TOPICS = [ ("/test", 0),
-                        ("/medicion/tension", 0),
-                        ("/medicion/corriente", 0),
-                        ("/config/f_sampl", 0),
-                        ("/config/t_muest", 0)]
-
-        client.subscribe(MQTT_TOPICS)
-        client.message_callback_add("/medicion/tension", on_message_tension)
-        client.message_callback_add("/medicion/corriente", on_message_corriente)
-        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
-        client.message_callback_add("/medicion/t_muest", on_message_t_muest)
-        client.message_callback_add("/test", on_message_test)"""
-
-    def suscribe(self, client):
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
                         ("/medicion/corriente", 0),
@@ -49,7 +35,7 @@ class mqtt_obj():
         print("Mensaje recibido: " + str(msg.payload))
 
 
-    def on_message(self, client, userdata, msg): 
+    def on_message_server(self, client, userdata, msg): 
         print(msg.topic + " " + str(msg.payload)) 
 
     def on_message_tension(self, client, userdata, msg):
@@ -85,11 +71,11 @@ class mqtt_obj():
         electric_data.load_tm(float(msg.payload))
 
     def connect_server(self, ip, puerto, tiempo):
-        self.client.on_connect = self.on_connect 
-        self.client.on_message = self.on_message
-        self.suscribe(self.client)
-        self.client.connect(ip, puerto, tiempo)
-        self.client.loop_start()
+        self = mqtt.Client()
+        self.on_connect = self.on_connect_server 
+        self.on_message = self.on_message_server
+        self.connect(ip, puerto, tiempo)
+        self.loop_start()
         return self.client
 
     def connect_cliente(self, ip, puerto, tiempo):
