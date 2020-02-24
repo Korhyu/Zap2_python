@@ -19,6 +19,7 @@ class mqtt_obj():
         client.message_callback_add("/medicion/corriente", on_message_corriente)
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+        client.message_callback_add("/test", on_message_test)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -28,6 +29,8 @@ class mqtt_obj():
         client.subscribe("/config/f_sampl")
         client.subscribe("/config/t_muest")
 
+    def on_message_test(self, client, userdata, msg): 
+        print("Mensaje recibido: " + str(msg.payload))
 
     # The callback for when a PUBLISH message is received from the server. 
     def on_message(self, client, userdata, msg): 
@@ -74,11 +77,13 @@ class mqtt_obj():
         self.on_connect = self.on_connect 
         self.on_message = self.on_message 
         self.connect(ip, puerto, tiempo)
-        self.loop_start()  
+        self.loop_start()
+        return self
 
     def connect_cliente(self, ip, puerto, tiempo):
         self = mqtt.Client() 
         self.on_connect = on_connect_cliente 
         self.on_message = on_message 
         self.connect(ip, puerto, tiempo)
-        self.loop_start()  
+        self.loop_start()
+        return self

@@ -38,37 +38,37 @@ if __name__ == "__main__":
     print("punto 2")
 
     while True:
-
         if flag_v and flag_i is True:
             flag_v = False
             flag_i = False
             datos.analize()
 
 
-
-
 def on_message_tension(client, userdata, msg, datos):
     try:
         valor = float(msg.payload)
-        flag_v = True
-        cont = 0            
-
+        datos.vec_tension.append()
+        print(str(valor) + " [V]")
+        cont = cont + 1
+                    
     except ValueError:
         print("Fin de vector")
-        datos.vec_tension.append()
-        cont = cont + 1
+        flag_v = True
+        cont = 0
 
 
 def on_message_corriente(client, userdata, msg, datos):
     try:
         valor = float(msg.payload)
-        flag_i = True
-        cont = 0            
+        datos.vec_corriente.append()
+        print(str(valor) + " [A]")
+        cont = cont + 1      
 
     except ValueError:
         print("Fin de vector")
-        datos.vec_corriente.append()
-        cont = cont + 1
+        flag_i = True
+        cont = 0 
+        
 
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
