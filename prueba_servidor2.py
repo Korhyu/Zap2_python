@@ -9,10 +9,18 @@ global mqttclient;
 global broker;
 global port;
 
+
+# Datos MQTT
 broker = "localhost";
 port = 1883;
 MQTT_TOPICS = [ ("/lec", 0),
                 ("/esc", 0)];
+
+# Datos de la base de datos
+db = mysql.connector.connect(   host="localhost",
+                                user="zap2app",
+                                passwd="zap2app",
+                                db="zap2")
 
 
 def esc_callback(client, userdata, message):
@@ -25,12 +33,12 @@ def esc_callback(client, userdata, message):
         datos = float(msg.payload.decode("utf-8"))
         print("QUERY: " + instruccion + "datos " + datos)
         cur.execute(instruccion, datos)
+        print("Dato almacenado")
 
     except Error as e:
         print("Error while connecting to MySQL", e)
 
-    finally:
-        print("Dato almacenado")
+    finally:   
         cur.close()
 
 
