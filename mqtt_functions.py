@@ -23,7 +23,7 @@ class mqtt_obj():
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
 
-        print("conectado a los topicos ", MQTT_TOPICS)
+        print("Conectado a los topicos %s" % MQTT_TOPICS)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
@@ -37,9 +37,6 @@ class mqtt_obj():
         client.message_callback_add("/config/t_muest", config_tmuest)
         client.message_callback_add("/test", on_message_test)
 
-        client.subscribe("/test")
-        client.subscribe("/config/f_sampl")
-        client.subscribe("/config/t_muest")
 
     def config_fsam(self, client, userdata, msg):
         pass
@@ -89,7 +86,7 @@ class mqtt_obj():
 
     def connect_server(self, ip, puerto, tiempo):
         self.client.on_connect = self.on_connect_server 
-        self.client.on_message = self.on_message_server
+        #self.client.on_message = self.on_message_server
         self.client.connect(ip, puerto, tiempo)
         self.client.loop_start()
         return self.client
@@ -97,7 +94,7 @@ class mqtt_obj():
     def connect_cliente(self, ip, puerto, tiempo):
         self = mqtt.Client() 
         self.on_connect = on_connect_cliente 
-        self.on_message = on_message
+        #self.on_message = on_message
         self.connect(ip, puerto, tiempo)
         self.loop_start()
         return self
