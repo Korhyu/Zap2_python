@@ -62,7 +62,6 @@ def pub(topic, value):
 
 
 
-
 mypid = os.getpid()
 client_uniq = "pubclient_"+str(mypid)
 mqttclient = paho.Client(client_uniq, False) #nocleanstart

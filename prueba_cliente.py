@@ -31,7 +31,7 @@ def on_message(client, userdata, msg):
 # Create MQTT client and connect to localhost, i.e. the Raspberry Pi running 
 # this script and the MQTT server. 
 client = mqtt.Client() 
-client.on_connect = on_connect 
+client.on_connect = on_connect
 client.on_message = on_message 
 client.connect('192.168.0.28', 1883, 60) 
 # Connect to the MQTT server and process messages in a background thread. 
@@ -44,4 +44,4 @@ while True:
 
     num = random.randint(1,101)
     print('publicando el numero ' + str(num))
-    client.publish(topic='esc/', payload=num, qos=0, retain=False)
+    client.publish(topic='esc', payload=num, qos=0, retain=False)
