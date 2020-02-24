@@ -6,21 +6,6 @@ class mqtt_obj():
     def __init__(self):
         pass
 
-    def connect_server(self, ip, puerto, tiempo):
-        self = mqtt.Client() 
-        self.on_connect = on_connect 
-        self.on_message = on_message 
-        self.connect(ip, puerto, tiempo)
-        self.client.loop_start()  
-
-    def connect_cliente(self, ip, puerto, tiempo):
-        self = mqtt.Client() 
-        self.on_connect = on_connect_cliente 
-        self.on_message = on_message 
-        self.connect(ip, puerto, tiempo)
-        self.client.loop_start()  
-
-
     def on_connect(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
         MQTT_TOPICS = [ ("/test", 0),
@@ -83,3 +68,17 @@ class mqtt_obj():
 
     def on_message_t_muest(self, client, userdata, msg):
         electric_data.load_tm(float(msg.payload))
+
+    def connect_server(self, ip, puerto, tiempo):
+        self = mqtt.Client() 
+        self.on_connect = on_connect 
+        self.on_message = on_message 
+        self.connect(ip, puerto, tiempo)
+        self.client.loop_start()  
+
+    def connect_cliente(self, ip, puerto, tiempo):
+        self = mqtt.Client() 
+        self.on_connect = on_connect_cliente 
+        self.on_message = on_message 
+        self.connect(ip, puerto, tiempo)
+        self.client.loop_start()  
