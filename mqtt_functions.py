@@ -4,10 +4,9 @@ from electric_data import electric_data
 
 class mqtt_obj():
     def __init__(self):
-        print("Creando mqtt")
         self.data = electric_data
         self.client = mqtt.Client()
-        print("Creado...")
+        print("Servidor MQTT listo")
 
     def on_connect_server(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
@@ -23,14 +22,30 @@ class mqtt_obj():
         client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
+
+        print("conectado a los topicos ", MQTT_TOPICS)
     
 
     def on_connect_cliente(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
+        MQTT_TOPICS = [ ("/test", 0),
+                        ("/config/f_sampl", 0),
+                        ("/config/t_muest", 0)]
+
+        client.subscribe(MQTT_TOPICS)
+        client.message_callback_add("/config/f_sampl", config_fsam)
+        client.message_callback_add("/config/t_muest", config_tmuest)
+        client.message_callback_add("/test", on_message_test)
 
         client.subscribe("/test")
         client.subscribe("/config/f_sampl")
         client.subscribe("/config/t_muest")
+
+    def config_fsam(self, client, userdata, msg):
+        pass
+
+    def config_tmuest(self, client, userdata, msg):
+        pass
 
     def on_message_test(self, client, userdata, msg): 
         print("Mensaje recibido: " + str(msg.payload))
@@ -38,6 +53,7 @@ class mqtt_obj():
 
     def on_message_server(self, client, userdata, msg): 
         print(msg.topic + " " + str(msg.payload)) 
+
 
     def on_message_tension(self, client, userdata, msg):
         print("msj atencion")
