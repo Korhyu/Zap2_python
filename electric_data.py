@@ -3,11 +3,10 @@ from functions import funciones
 from scipy import signal
 
 
-#from mqtt_functions import mqtt_obj
-#from matplotlib import pyplot as plt
-
-
 class electric_data(funciones):
+    def __init__(self):
+        pass
+
     def __init__(self, ts, tm, av, ai, freq, phi):
         self.ts = ts
         self.tm = tm
