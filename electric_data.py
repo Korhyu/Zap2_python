@@ -4,6 +4,47 @@ from scipy import signal
 
 
 class electric_data(funciones):
+
+    self.ts = 0
+    self.tm = 0
+    self.tfin = 0
+    self.av = 0
+    self.ai = 0
+    self.phi = 0
+
+    self.v = []                             #Vector de tension
+    self.i = []                             #Vector de corriente
+    self.t = []                             #Vector de tiempo
+
+    self.flagV = False                      #Flag auxiliar de Tension
+    self.flagI = False                      #Flag auxiliar de Corriente
+
+    self.pp = []                            #Potencia activa
+    self.pq = []                            #Potencia reactiva
+    self.ps = []                            #Potencia aparente
+    
+    self.maxv_indx = 0                      #Indice de tension maxima
+    self.maxi_indx = 0                      #Indice de corriente maxia
+    self.cosfi = 0                          #Coseno fi
+    self.powfac = 0                         #Factor de potencia
+    self.freq = 0                           #Frecuencia medida
+    self.freq_dat = 0                       #Frecuencia para generador
+
+    self.V = []                             #Vector de tensiones fourier
+    self.I = []                             #Vector de corriente fourier
+    self.f = []                             #Vector de frecuencias fourier
+    self.fp = 0                             #Frecuencia de paso del vector
+    self.fs = 0                             #Frecuencia de muestreo
+
+    self.magA = []                          #Magnitud de Armonicos
+    self.freA = []                          #Frecuencia de Armonicos
+    self.THD = 0                            #THD de senal
+
+    self.a = []                             #Componentes del filtro
+    self.b = []                             #Componentes del filtro
+    self.filt = []                          #Senal Filtrada
+
+
     def __init__(self):
         pass
 
@@ -15,9 +56,9 @@ class electric_data(funciones):
         self.ai = ai
         self.phi = phi
 
-        self.v = []                             #Vector de tension
-        self.i = []                             #Vector de corriente
-        self.t = []                             #Vector de tiempo
+        self.v = [] * self.tfin                 #Vector de tension
+        self.i = [] * self.tfin                 #Vector de corriente
+        self.t = [] * self.tfin                 #Vector de tiempo
 
         self.flagV = False                      #Flag auxiliar de Tension
         self.flagI = False                      #Flag auxiliar de Corriente
@@ -26,26 +67,10 @@ class electric_data(funciones):
         self.pq = [0] * self.tfin               #Potencia reactiva
         self.ps = [0] * self.tfin               #Potencia aparente
         
-        self.maxv_indx = 0                      #Indice de tension maxima
-        self.maxi_indx = 0                      #Indice de corriente maxia
-        self.cosfi = 0                          #Coseno fi
-        self.powfac = 0                         #Factor de potencia
-        self.freq = 0                           #Frecuencia medida
         self.freq_dat = freq                    #Frecuencia para generador
 
-        self.V = [0]                            #Vector de tensiones fourier
-        self.I = [0]                            #Vector de corriente fourier
-        self.f = [0]                            #Vector de frecuencias fourier
-        self.fp = 0                             #Frecuencia de paso del vector
         self.fs = 1/ts                          #Frecuencia de muestreo
 
-        self.magA = []                          #Magnitud de Armonicos
-        self.freA = []                          #Frecuencia de Armonicos
-        self.THD = 0                            #THD de senal
-
-        self.a = []                             #Componentes del filtro
-        self.b = []                             #Componentes del filtro
-        self.filt = []                          #Senal Filtrada
     
     def __init__(self, ts, tm):
         self.ts = ts
