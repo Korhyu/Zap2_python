@@ -15,7 +15,7 @@ if __name__ == "__main__":
     vec_corriente = []
 
     obj_mqtt = mqtt_obj()
-    datos = electric_data()
+    datos = electric_data(1,1)
     obj_mqtt.data = datos
     
 
