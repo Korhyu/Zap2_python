@@ -1,4 +1,5 @@
 import math
+import struct
 import paho.mqtt.client as mqtt 
 import mysql.connector
 from mysql.connector import Error
@@ -6,6 +7,8 @@ from mqtt_functions import mqtt_obj
 from sql_functions import funcionesSQL
 from electric_data import electric_data
 from ast import literal_eval
+from codecs import decode
+
 
 
 def bin_to_float(b):
