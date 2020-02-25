@@ -15,8 +15,6 @@ if __name__ == "__main__":
     vec_corriente = []
 
     obj_mqtt = mqtt_obj()
-    obj_sql = funcionesSQL()
-
     datos = electric_data()
     obj_mqtt.data = datos
     
@@ -25,6 +23,7 @@ if __name__ == "__main__":
     server = obj_mqtt.connect_server('localhost', 1883, 60)
 
     # Pruebo la conexion a la db
+    obj_sql = funcionesSQL()
     #obj_sql.test_db_conn()
 
 

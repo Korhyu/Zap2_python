@@ -95,9 +95,8 @@ class mqtt_obj():
         return self.client
 
     def connect_cliente(self, ip, puerto, tiempo):
-        self = mqtt.Client() 
-        self.on_connect = on_connect_cliente 
-        #self.on_message = on_message
-        self.connect(ip, puerto, tiempo)
-        self.loop_start()
+        self.client.on_connect = self.on_connect_cliente 
+        #self.client.on_message = self.on_message_cliente
+        self.client.connect(ip, puerto, tiempo)
+        self.client.loop_start()
         return self
