@@ -88,7 +88,7 @@ class funciones:
             self.ps[j] = self.v[j] * self.i[j] / 1000
             self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
-            print(str(j) + " " + str(pp[j]) + " " + str(ps[j]) + " " + str(pq[j]))
+            print(str(j) + " " + str(self.pp[j]) + " " + str(self.ps[j]) + " " + str(self.pq[j]))
 
     def init_vect(self):
         print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
