@@ -22,6 +22,7 @@ class funciones:
         Cuenta cada "cero" cada vez que pasa desde negativo a positivo"""
         zf = 0
         for j in range(len(vec)):
+            print(str(vec[j]))
             if vec[j] < 0 and vec[j+1] > 0:
                 zf = zf + 1
             if zf >= nz:
@@ -88,7 +89,7 @@ class funciones:
             self.ps[j] = self.v[j] * self.i[j] / 1000
             self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
-            print(str(j) + " " + str(self.pp[j]) + " " + str(self.ps[j]) + " " + str(self.pq[j]))
+            #print(str(j) + " " + str(self.pp[j]) + " " + str(self.ps[j]) + " " + str(self.pq[j]))
 
     def init_vect(self):
         print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
