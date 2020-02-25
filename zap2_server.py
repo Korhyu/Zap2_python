@@ -8,6 +8,12 @@ from electric_data import electric_data
 from ast import literal_eval
 
 
+def bin_to_float(b):
+    """ Convert binary string to a float. """
+    bf = int_to_bytes(int(b, 2), 8)  # 8 bytes needed for IEEE 754 binary64.
+    return struct.unpack('>d', bf)[0]
+
+
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
@@ -40,7 +46,7 @@ def on_message_test(client, userdata, msg):
 def on_message_tension(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     try:
-        valor = float(literal_eval(msg.payload))
+        valor = bin_to_float(msg.payload)
         datos.v.append(valor)
         print(str(valor) + " [V]")
         cont = cont + 1      
