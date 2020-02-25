@@ -22,7 +22,7 @@ ap = 2
 print("Empienza el envio de datos")
 time.sleep(0.5)
 
-server.publish(topic='/medicion/t_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
+server.publish(topic='/medicion/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
 server.publish(topic='/medicion/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
 
 #Datos de tension
