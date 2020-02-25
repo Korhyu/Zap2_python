@@ -5,44 +5,44 @@ from scipy import signal
 
 class electric_data(funciones):
 
-    self.ts = 0
-    self.tm = 0
-    self.tfin = 0
-    self.av = 0
-    self.ai = 0
-    self.phi = 0
+    ts = 0
+    tm = 0
+    tfin = 0
+    av = 0
+    ai = 0
+    phi = 0
 
-    self.v = []                             #Vector de tension
-    self.i = []                             #Vector de corriente
-    self.t = []                             #Vector de tiempo
+    v = []                             #Vector de tension
+    i = []                             #Vector de corriente
+    t = []                             #Vector de tiempo
 
-    self.flagV = False                      #Flag auxiliar de Tension
-    self.flagI = False                      #Flag auxiliar de Corriente
+    flagV = False                      #Flag auxiliar de Tension
+    flagI = False                      #Flag auxiliar de Corriente
 
-    self.pp = []                            #Potencia activa
-    self.pq = []                            #Potencia reactiva
-    self.ps = []                            #Potencia aparente
+    pp = []                            #Potencia activa
+    pq = []                            #Potencia reactiva
+    ps = []                            #Potencia aparente
     
-    self.maxv_indx = 0                      #Indice de tension maxima
-    self.maxi_indx = 0                      #Indice de corriente maxia
-    self.cosfi = 0                          #Coseno fi
-    self.powfac = 0                         #Factor de potencia
-    self.freq = 0                           #Frecuencia medida
-    self.freq_dat = 0                       #Frecuencia para generador
+    maxv_indx = 0                      #Indice de tension maxima
+    maxi_indx = 0                      #Indice de corriente maxia
+    cosfi = 0                          #Coseno fi
+    powfac = 0                         #Factor de potencia
+    freq = 0                           #Frecuencia medida
+    freq_dat = 0                       #Frecuencia para generador
 
-    self.V = []                             #Vector de tensiones fourier
-    self.I = []                             #Vector de corriente fourier
-    self.f = []                             #Vector de frecuencias fourier
-    self.fp = 0                             #Frecuencia de paso del vector
-    self.fs = 0                             #Frecuencia de muestreo
+    V = []                             #Vector de tensiones fourier
+    I = []                             #Vector de corriente fourier
+    f = []                             #Vector de frecuencias fourier
+    fp = 0                             #Frecuencia de paso del vector
+    fs = 0                             #Frecuencia de muestreo
 
-    self.magA = []                          #Magnitud de Armonicos
-    self.freA = []                          #Frecuencia de Armonicos
-    self.THD = 0                            #THD de senal
+    magA = []                          #Magnitud de Armonicos
+    freA = []                          #Frecuencia de Armonicos
+    THD = 0                            #THD de senal
 
-    self.a = []                             #Componentes del filtro
-    self.b = []                             #Componentes del filtro
-    self.filt = []                          #Senal Filtrada
+    a = []                             #Componentes del filtro
+    b = []                             #Componentes del filtro
+    filt = []                          #Senal Filtrada
 
 
     def __init__(self):
