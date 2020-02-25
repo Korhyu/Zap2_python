@@ -104,8 +104,8 @@ class electric_data(funciones):
             print(str(j) + "   " + str(self.v[j]) + "   " + str(self.i[j]))
 
     #Carga de frecuencia de muestreo
-    def load_ts(self, f_samp):
-        self.fs = 1/f_samp
+    def load_ts(self, t_samp):
+        self.ts = float(t_samp)
 
         #Calculo el tiempo final
         if self.fs is not 0 and self.tm is not 0:
