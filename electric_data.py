@@ -99,6 +99,9 @@ class electric_data(funciones):
     def load_current(self, vector_i):
         self.i = vector_i                       #Vector de corriente
 
+    def print_data(self):
+        for j in range(len(self.v)):
+            print(str(self.v[j]) + "   " + str(self.i[j])
 
     #Carga de frecuencia de muestreo
     def load_fs(self, f_samp):
