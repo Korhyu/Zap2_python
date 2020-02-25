@@ -86,6 +86,8 @@ class funciones:
     def power_calc(self):
         print("Largo vector tension: " + str(len(self.v)))
         print("Largo vector corriente: " + str(len(self.i)))
+        for j in range(len(self.v)):
+            print(j + "   " + str(self.v[j]) + "   " + str(self.i[j]))
 
         for j in range(len(self.v)):
             print("j: " + str(j))
