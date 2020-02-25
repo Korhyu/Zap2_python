@@ -22,9 +22,7 @@ def on_message_f_sampl(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
     datos.ts = (1/valor)
-    print("valor recivido: " + str(valor))
-    print("inversa: " + str(1/valor))
-    print("valor ts cargado: " + str(datos.ts))
+    print("Frecuencia de muestreo modificada: " + str(1/datos.ts))
 
 def on_message_t_muest(client, userdata, msg):
     global datos
