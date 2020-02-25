@@ -18,10 +18,10 @@ vector_I = []
 
 
 
-def on_message_t_sampl(client, userdata, msg):
+def on_message_f_sampl(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
-    datos.load_ts(valor)
+    datos.load_ts(1/valor)
     print("Frecuencia de muestreo modificada: " + str(1/datos.ts))
 
 def on_message_t_muest(client, userdata, msg):
