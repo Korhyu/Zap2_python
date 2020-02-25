@@ -13,10 +13,11 @@ if __name__ == "__main__":
     flag_i = False
 
     datos = electric_data()
+
     
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
-    server = obj_mqtt.connect_server('localhost', 1883, 60)
+    conn_mqtt = conexion_mqtt()
 
     # Pruebo la conexion a la db
     obj_sql = funcionesSQL()
