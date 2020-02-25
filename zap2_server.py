@@ -12,7 +12,7 @@ if __name__ == "__main__":
     flag_v = False
     flag_i = False
 
-    datos = electric_data()
+    datos = electric_data(1, 0)
 
     
 
