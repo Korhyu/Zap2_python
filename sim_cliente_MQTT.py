@@ -12,7 +12,7 @@ from mqtt_functions import mqtt_obj
 obj_mqtt = mqtt_obj()
 server = obj_mqtt.connect_server('192.168.0.28', 1883, 60)
 
-obj_mqtt.data.fs = 1000
+obj_mqtt.data.fs = 2000
 obj_mqtt.data.ts = 1/obj_mqtt.data.fs
 obj_mqtt.data.tm = 2
 vp = 311

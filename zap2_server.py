@@ -11,17 +11,13 @@ if __name__ == "__main__":
     flag_v = False
     flag_i = False
 
-    tm = 2                      #Tiempo de muestreo
-    fs = 1000                   #Frecuencia de muestreo
-    ts = float(1/fs)            #Periodo de muestreo
-
     vec_tension = []
     vec_corriente = []
 
     obj_mqtt = mqtt_obj()
     obj_sql = funcionesSQL()
 
-    datos = electric_data(ts, tm)   #Cargo los datos
+    datos = electric_data()
     obj_mqtt.data = datos
     
 
