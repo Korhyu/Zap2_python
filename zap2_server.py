@@ -36,7 +36,7 @@ def on_connect(client, userdata, flags, rc):
 
     print("Conectado a los topicos:" )
     for j in len(MQTT_TOPICS):
-        print("\t %s",str(MQTT_TOPICS[j][0]))
+        print("\t %s"  % str(MQTT_TOPICS[j][0]))
 
 
 def on_message_test(client, userdata, msg):
