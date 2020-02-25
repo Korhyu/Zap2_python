@@ -22,13 +22,13 @@ ap = 2
 print("Empienza el envio de datos")
 time.sleep(0.5)
 
-server.publish(topic='/medicion/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
+server.publish(topic='/medicion/t_sampl', payload=obj_mqtt.data.ts, qos=0, retain=False)
 server.publish(topic='/medicion/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
 
 #Datos de tension
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     n = random.randint(-100,100)
-    num = vp * math.sin(2 * math.pi* 50 * j/obj_mqtt.data.fs)
+    num = vp * math.sin(2 * math.pi* 50 * j * obj_mqtt.data.ts)
     num = float("{0:.3f}".format(num))
     server.publish(topic='/medicion/tension', payload=num, qos=0, retain=False)
 
@@ -46,7 +46,7 @@ time.sleep(2)
 #Datos de corriente
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     n = random.randint(-100,100)
-    num = ap * math.sin(2 * math.pi* 50 * j/obj_mqtt.data.fs)
+    num = ap * math.sin(2 * math.pi* 50 * j * obj_mqtt.data.ts)
     num = float("{0:.3f}".format(num))
     server.publish(topic='/medicion/corriente', payload=num, qos=0, retain=False)
 

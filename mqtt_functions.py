@@ -13,13 +13,13 @@ class mqtt_obj():
         MQTT_TOPICS = [ ("/test", 0),
                         ("/medicion/tension", 0),
                         ("/medicion/corriente", 0),
-                        ("/config/f_sampl", 0),
+                        ("/config/t_sampl", 0),
                         ("/config/t_muest", 0)]
 
         client.subscribe(MQTT_TOPICS)
         client.message_callback_add("/medicion/tension", on_message_tension)
         client.message_callback_add("/medicion/corriente", on_message_corriente)
-        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
+        client.message_callback_add("/medicion/t_sampl", on_message_t_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
 
@@ -29,21 +29,23 @@ class mqtt_obj():
     def on_connect_cliente(self, client, userdata, flags, rc): 
         print("Connected with result code " + str(rc)) 
         MQTT_TOPICS = [ ("/test", 0),
-                        ("/config/f_sampl", 0),
+                        ("/config/t_sampl", 0),
                         ("/config/t_muest", 0)]
 
         client.subscribe(MQTT_TOPICS)
-        client.message_callback_add("/config/f_sampl", config_fsam)
+        client.message_callback_add("/config/t_sampl", config_tsam)
         client.message_callback_add("/config/t_muest", config_tmuest)
         client.message_callback_add("/test", on_message_test)
 
-        client.publish(topic='/medicion/f_sampl', payload=self.data.fs, qos=0, retain=False)
+        client.publish(topic='/medicion/t_sampl', payload=self.data.ts, qos=0, retain=False)
         client.publish(topic='/medicion/t_muest', payload=self.data.ts, qos=0, retain=False)
 
-    def config_fsam(self, client, userdata, msg):
+    def config_tsam(self, client, userdata, msg):
+        #Configuro el tiempo entre muestras
         pass
 
     def config_tmuest(self, client, userdata, msg):
+        #Configuro el tiempo de la ventana de muestreo
         pass
 
     def on_message_test(self, client, userdata, msg): 
@@ -81,8 +83,8 @@ class mqtt_obj():
             flag_i = True
             cont = 0 
 
-    def on_message_f_sampl(self, client, userdata, msg):
-        electric_data.load_fs(float(msg.payload))
+    def on_message_t_sampl(self, client, userdata, msg):
+        electric_data.load_ts(float(msg.payload))
 
     def on_message_t_muest(self, client, userdata, msg):
         electric_data.load_tm(float(msg.payload))
