@@ -103,23 +103,6 @@ class electric_data(funciones):
         for j in range(len(self.v)):
             print(str(j) + "   " + str(self.v[j]) + "   " + str(self.i[j]))
 
-    #Carga de frecuencia de muestreo
-    def load_ts(self, t_samp):
-        self.ts = float(t_samp)
-
-        #Calculo el tiempo final
-        if self.fs is not 0 and self.tm is not 0:
-            self.tfin = math.ceil(self.tm / self.ts)
-
-
-    #Carga de tiempo de muestreo
-    def load_tm(self, t_muest):
-        self.tm = t_muest
-
-        #Calculo el tiempo final
-        if self.ts is not 0 and self.tm is not 0:
-            self.tfin = math.ceil(self.tm / self.ts)
-
 
     def analize(self):  
         self.init_vect()                                #Inicializo los vectores de potencia

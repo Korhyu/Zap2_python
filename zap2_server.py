@@ -21,7 +21,7 @@ vector_I = []
 def on_message_f_sampl(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
-    datos.load_ts(1/valor)
+    datos.ts = (1/valor)
     print("valor recivido: " + str(valor))
     print("inversa: " + str(1/valor))
     print("valor ts cargado: " + str(1/datos.ts))
@@ -29,7 +29,7 @@ def on_message_f_sampl(client, userdata, msg):
 def on_message_t_muest(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
-    datos.load_tm(valor)
+    datos.tm(valor)
     print("Tiempo de muestreo modificado: " + str(datos.tm))
 
 
