@@ -10,6 +10,14 @@ from ast import literal_eval
 from codecs import decode
 
 
+# Variables Globales
+datos = electric_data(1, 0)
+vector_V = []
+vector_I = []
+
+
+
+
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
@@ -67,6 +75,7 @@ def on_message_corriente(client, userdata, msg):
         print("Fin de vector")
         datos.flagI = True
         datos.load_current(vector_I)
+        vector_I = []
         #cont = 0
 
         if (datos.flagV and datos.flagI) is True:
@@ -87,15 +96,6 @@ def conexion_mqtt():
 
 if __name__ == "__main__":
 
-    global datos
-    global vector_V
-    global vector_I
-
-    datos = electric_data(1, 0)
-    vector_V = []
-    vector_I = []
-
-
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     conn_mqtt = conexion_mqtt()
 
@@ -105,11 +105,9 @@ if __name__ == "__main__":
 
 
     while True:
-        if (flag_v and flag_i) is True:
+        if (datos.flagV and datos.flagI) is True:
             print("Vectores recibidos, comienza analisis...")
             datos.load_data(vector_V, vector_I)
             vector_V = []
             vector_I = []
-            flag_v = False
-            flag_i = False
             datos.analize()
