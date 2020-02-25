@@ -13,7 +13,7 @@ from codecs import decode
 
 def bin_to_float(b):
     """ Convert binary string to a float. """
-    return bin(struct.unpack('!I', struct.pack('!f', num))[0])[2:].zfill(32)
+    return bin(struct.unpack('!I', struct.pack('!f', b))[0])[2:].zfill(32)
 
 
 def on_message_f_sampl(self, client, userdata, msg):
