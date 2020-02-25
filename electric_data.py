@@ -19,6 +19,9 @@ class electric_data(funciones):
         self.i = []                             #Vector de corriente
         self.t = []                             #Vector de tiempo
 
+        self.flagV = False                      #Flag auxiliar de Tension
+        self.flagI = False                      #Flag auxiliar de Corriente
+
         self.pp = [0] * self.tfin               #Potencia activa
         self.pq = [0] * self.tfin               #Potencia reactiva
         self.ps = [0] * self.tfin               #Potencia aparente
@@ -65,6 +68,12 @@ class electric_data(funciones):
         self.v = vector_v                       #Vector de tension
         self.i = vector_i                       #Vector de corriente
 
+    def load_voltage(self, vector_v):
+        self.v = vector_v                       #Vector de tension
+
+    def load_current(self, vector_i):
+        self.i = vector_i                       #Vector de corriente
+
 
     #Carga de frecuencia de muestreo
     def load_fs(self, f_samp):
@@ -86,6 +95,9 @@ class electric_data(funciones):
 
     def analize(self):  
         self.fourier_data()                     #Calculo de Fourier
+
+        self.flagI = False
+        self.flagV = False
 
         self.design_filter('C1', 1, [100*self.ts, 200*self.ts], 60)
         self.filtrado(self.i)

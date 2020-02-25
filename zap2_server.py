@@ -10,7 +10,6 @@ from ast import literal_eval
 from codecs import decode
 
 
-
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
@@ -46,21 +45,15 @@ def on_message_tension(client, userdata, msg):
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_V.append(valor)
-        print(str(valor) + " [V]")
-        #cont = cont + 1      
+        print(str(valor) + " [V]")   
 
     except ValueError:
         print("Fin de vector")
         flag_v = True
-        #cont = 0
+        datos.load_voltage(vector_V)
 
-        if (flag_v and flag_i) is True:
+        if (datos.flagV and datos.flagI) is True:
             print("Vectores recibidos, comienza analisis...")
-            datos.load_data(vector_V, vector_I)
-            vector_V = []
-            vector_I = []
-            flag_v = False
-            flag_i = False
             datos.analize()
 
 def on_message_corriente(client, userdata, msg):
@@ -72,19 +65,14 @@ def on_message_corriente(client, userdata, msg):
 
     except ValueError:
         print("Fin de vector")
-        flag_i = True
+        datos.flagI = True
+        datos.load_current(vector_I)
         #cont = 0
 
-        if (flag_v and flag_i) is True:
+        if (datos.flagV and datos.flagI) is True:
             print("Vectores recibidos, comienza analisis...")
-            datos.load_data(vector_V, vector_I)
-            vector_V = []
-            vector_I = []
-            flag_v = False
-            flag_i = False
             datos.analize()
-
-    
+           
 
 def conexion_mqtt():
     client = mqtt.Client() 
@@ -99,12 +87,11 @@ def conexion_mqtt():
 
 if __name__ == "__main__":
 
-    flag_v = False
-    flag_i = False
-
     datos = electric_data(1, 0)
     vector_V = []
     vector_I = []
+    flag_v = False
+    flag_i = False
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     conn_mqtt = conexion_mqtt()
