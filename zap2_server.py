@@ -34,15 +34,15 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("/medicion/t_muest", on_message_t_muest)
     client.message_callback_add("/test", on_message_test)
 
-    print("Conectado a los topicos %s" % MQTT_TOPICS)
+    print("Conectado a los topicos:" )
+    for j in len(MQTT_TOPICS):
+        print("\t %s",MQTT_TOPICS[j][0])
 
 
 def on_message_test(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
 
 def on_message_tension(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload))
-    print(msg.topic + " " + str(float(msg.payload.decode("utf-8"))))
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_V.append(valor)
@@ -56,7 +56,7 @@ def on_message_tension(client, userdata, msg):
 
 def on_message_corriente(client, userdata, msg):
     try:
-        valor = float(int(msg.payload, 2))
+        valor = float(msg.payload.decode("utf-8"))
         vector_I.append(valor)
         print(str(valor) + " [A]")
         #cont = cont + 1      
@@ -85,8 +85,6 @@ if __name__ == "__main__":
     datos = electric_data(1, 0)
     vector_V = []
     vector_I = []
-
-    
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     conn_mqtt = conexion_mqtt()
