@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
 
     while True:
-        if (datos.flagV and datos.flagI) is True:
+        if datos.flagV is True and datos.flagI is True:
             print("Vectores recibidos, comienza analisis...")
             datos.load_data(vector_V, vector_I)
             vector_V = []
