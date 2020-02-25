@@ -11,11 +11,6 @@ from codecs import decode
 
 
 
-def bin_to_float(b):
-    """ Convert binary string to a float. """
-    return bin(struct.unpack('!I', struct.pack('!f', b))[0])[2:].zfill(32)
-
-
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
@@ -48,7 +43,7 @@ def on_message_test(client, userdata, msg):
 def on_message_tension(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     try:
-        valor = bin_to_float(msg.payload)
+        valor = float(int(msg.payload, 2))
         datos.v.append(valor)
         print(str(valor) + " [V]")
         cont = cont + 1      
@@ -60,7 +55,7 @@ def on_message_tension(client, userdata, msg):
 
 def on_message_corriente(client, userdata, msg):
     try:
-        valor = float(literal_eval(msg.payload))
+        valor = float(int(msg.payload, 2))
         datos.i.append(valor)
         print(str(valor) + " [A]")
         cont = cont + 1      

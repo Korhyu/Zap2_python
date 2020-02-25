@@ -24,6 +24,7 @@ time.sleep(0.5)
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     n = random.randint(-100,100)
     num = vp * math.sin(2 * math.pi* 50 * j/obj_mqtt.data.fs)
+    num = float("{0:.3f}".format(num)) * 1000
     server.publish(topic='/medicion/tension', payload=num, qos=0, retain=False)
 
     if (j % 100) is 0:
