@@ -47,24 +47,24 @@ def on_message_tension(client, userdata, msg):
         valor = float(msg.payload.decode("utf-8"))
         vector_V.append(valor)
         print(str(valor) + " [V]")
-        cont = cont + 1      
+        #cont = cont + 1      
 
     except ValueError:
         print("Fin de vector")
         flag_v = True
-        cont = 0 
+        #cont = 0 
 
 def on_message_corriente(client, userdata, msg):
     try:
         valor = float(int(msg.payload, 2))
         vector_I.append(valor)
         print(str(valor) + " [A]")
-        cont = cont + 1      
+        #cont = cont + 1      
 
     except ValueError:
         print("Fin de vector")
         flag_i = True
-        cont = 0 
+        #cont = 0 
 
 def conexion_mqtt():
     client = mqtt.Client() 
