@@ -107,14 +107,14 @@ if __name__ == "__main__":
 
 
     while True:
-        time.sleep(5)
+        time.sleep(2)
 
         #print("datos.flagV: " + str(datos.flagV) + "  datos.flagI: " + str(datos.flagI))
 
         if datos.flagV is True and datos.flagI is True:
             print("Vectores recibidos, comienza analisis...")
             datos.load_data(vector_V, vector_I)
-            datos.print_data()
+            #datos.print_data()
             vector_V = []
             vector_I = []
             datos.analize()

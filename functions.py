@@ -97,6 +97,8 @@ class funciones:
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
             
     def init_vect(self):
+        print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
+        
         self.tfin = math.ceil(self.tm / self.ts)
 
         self.t = [0] * self.tfin              #Vector de tiempo

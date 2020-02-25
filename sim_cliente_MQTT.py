@@ -41,7 +41,7 @@ msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)
 server.publish(topic='/medicion/tension', payload=msj_fin, qos=0, retain=False)
 
-time.sleep(5)
+time.sleep(2)
 
 #Datos de corriente
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
