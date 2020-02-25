@@ -37,6 +37,8 @@ class mqtt_obj():
         client.message_callback_add("/config/t_muest", config_tmuest)
         client.message_callback_add("/test", on_message_test)
 
+        client.publish(topic='/medicion/f_sampl', payload=self.data.fs, qos=0, retain=False)
+        client.publish(topic='/medicion/t_muest', payload=self.data.ts, qos=0, retain=False)
 
     def config_fsam(self, client, userdata, msg):
         pass
@@ -87,7 +89,7 @@ class mqtt_obj():
 
     def connect_server(self, ip, puerto, tiempo):
         self.client.on_connect = self.on_connect_server 
-        self.client.on_message = self.on_message_server
+        #self.client.on_message = self.on_message_server
         self.client.connect(ip, puerto, tiempo)
         self.client.loop_start()
         return self.client

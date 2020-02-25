@@ -15,8 +15,8 @@ if __name__ == "__main__":
     fs = 1000                   #Frecuencia de muestreo
     ts = float(1/fs)            #Periodo de muestreo
 
-    vec_tension = [0] * math.ceil(tm / ts)
-    vec_corriente = [0] * math.ceil(tm / ts)
+    vec_tension = []
+    vec_corriente = []
 
     obj_mqtt = mqtt_obj()
     obj_sql = funcionesSQL()

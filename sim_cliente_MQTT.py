@@ -12,20 +12,20 @@ from mqtt_functions import mqtt_obj
 obj_mqtt = mqtt_obj()
 server = obj_mqtt.connect_server('192.168.0.28', 1883, 60)
 
-fs = 1000
-ts = 1/fs
-ts = 2
+obj_mqtt.data.fs = 1000
+obj_mqtt.data.ts = 1/obj_mqtt.data.fs
+obj_mqtt.data.tm = 2
 vp = 311
 
 
 
 
-server.publish(topic='/test', payload='sim cliente', qos=0, retain=False)
+#server.publish(topic='/test', payload='sim cliente', qos=0, retain=False)
 print("Empienza el envio de datos")
 
-for j in range(fs * ts):
+for j in range(obj_mqtt.data.fs * obj_mqtt.data.tm):
     n = random.randint(-100,100)
-    num = vp * math.sin(2 * math.pi* 50 * j/fs)
+    num = vp * math.sin(2 * math.pi* 50 * j/obj_mqtt.data.fs)
     server.publish(topic='/medicion/tension', payload=num, qos=0, retain=False)
 
     if (j % 100) is 0:
