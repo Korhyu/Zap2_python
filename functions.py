@@ -96,6 +96,14 @@ class funciones:
             self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
             
+    def init_vect(self):
+        self.tfin = math.ceil(self.tm / self.ts)
+
+        self.t = [0] * self.tfin              #Vector de tiempo
+        self.pp = [0] * self.tfin             #Vector de Potencia Activa
+        self.ps = [0] * self.tfin             #Vector de Potencia Aparente
+        self.pq = [0] * self.tfin             #Vector de Potencia Reactiva
+
 
     def fourier_data(self, vec = None):
         '''Si se recibe un vector se calcula todo en funcion al vector recibido.
