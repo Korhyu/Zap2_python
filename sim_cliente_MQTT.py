@@ -12,9 +12,9 @@ from mqtt_functions import mqtt_obj
 obj_mqtt = mqtt_obj()
 server = obj_mqtt.connect_server('192.168.0.28', 1883, 60)
 
-obj_mqtt.data.fs = 250
+obj_mqtt.data.fs = 1000
 obj_mqtt.data.ts = 1/obj_mqtt.data.fs
-obj_mqtt.data.tm = 0.06
+obj_mqtt.data.tm = 1
 vp = 311
 ap = 2
 
@@ -58,3 +58,6 @@ for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
 msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)
 server.publish(topic='/medicion/corriente', payload=msj_fin, qos=0, retain=False)
+
+
+time.sleep(2)
