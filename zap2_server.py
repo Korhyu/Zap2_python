@@ -60,12 +60,8 @@ def on_message_tension(client, userdata, msg):
 
     except ValueError:
         print("Fin de vector")
-        flag_v = True
+        datos.flagv = True
         datos.load_voltage(vector_V)
-
-        if (datos.flagV and datos.flagI) is True:
-            print("Vectores recibidos, comienza analisis...")
-            datos.analize()
 
 def on_message_corriente(client, userdata, msg):
     global datos
@@ -79,17 +75,11 @@ def on_message_corriente(client, userdata, msg):
         #cont = cont + 1      
 
     except ValueError:
-        print("Fin de vector " + str(datos.flagI) + str(datos.flagV))
+        print("Fin de vector")
         datos.flagI = True
         datos.load_current(vector_I)
         vector_I = []
-        #cont = 0
-
-
-        if (datos.flagV and datos.flagI) is True:
-            print("Vectores recibidos, comienza analisis...")
-            datos.analize()
-           
+        #cont = 0           
 
 def conexion_mqtt():
     client = mqtt.Client() 
@@ -119,3 +109,9 @@ if __name__ == "__main__":
             vector_V = []
             vector_I = []
             datos.analize()
+
+    """
+            if (datos.flagV and datos.flagI) is True:
+            print("Vectores recibidos, comienza analisis...")
+            datos.analize()
+"""
