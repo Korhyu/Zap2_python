@@ -1,5 +1,6 @@
 import math
 import struct
+import time
 import paho.mqtt.client as mqtt 
 import mysql.connector
 from mysql.connector import Error
@@ -103,6 +104,10 @@ if __name__ == "__main__":
 
 
     while True:
+        time.sleep(5)
+
+        print("datos.flagV: " + datos.flagV + "  datos.flagI: " + datos.flagI)
+
         if datos.flagV is True and datos.flagI is True:
             print("Vectores recibidos, comienza analisis...")
             datos.load_data(vector_V, vector_I)
