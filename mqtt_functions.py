@@ -19,7 +19,7 @@ class mqtt_obj():
         client.subscribe(MQTT_TOPICS)
         client.message_callback_add("/medicion/tension", on_message_tension)
         client.message_callback_add("/medicion/corriente", on_message_corriente)
-        client.message_callback_add("/medicion/t_sampl", on_message_t_sampl)
+        client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
         client.message_callback_add("/medicion/t_muest", on_message_t_muest)
         client.message_callback_add("/test", on_message_test)
 
@@ -83,7 +83,7 @@ class mqtt_obj():
             flag_i = True
             cont = 0 
 
-    def on_message_t_sampl(self, client, userdata, msg):
+    def on_message_f_sampl(self, client, userdata, msg):
         electric_data.load_ts(float(msg.payload))
 
     def on_message_t_muest(self, client, userdata, msg):

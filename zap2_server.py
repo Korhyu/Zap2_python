@@ -37,13 +37,13 @@ def on_connect(client, userdata, flags, rc):
     MQTT_TOPICS = [ ("/test", 0),
                     ("/medicion/tension", 0),
                     ("/medicion/corriente", 0),
-                    ("/medicion/t_sampl", 0),
+                    ("/medicion/f_sampl", 0),
                     ("/medicion/t_muest", 0)]
 
     client.subscribe(MQTT_TOPICS)
     client.message_callback_add("/medicion/tension", on_message_tension)
     client.message_callback_add("/medicion/corriente", on_message_corriente)
-    client.message_callback_add("/medicion/t_sampl", on_message_t_sampl)
+    client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
     client.message_callback_add("/medicion/t_muest", on_message_t_muest)
     client.message_callback_add("/test", on_message_test)
 
