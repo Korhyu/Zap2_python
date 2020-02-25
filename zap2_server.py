@@ -7,32 +7,6 @@ from sql_functions import funcionesSQL
 from electric_data import electric_data
 
 
-if __name__ == "__main__":
-
-    flag_v = False
-    flag_i = False
-
-    datos = electric_data(1, 0)
-
-    
-
-    # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
-    conn_mqtt = conexion_mqtt()
-
-    # Pruebo la conexion a la db
-    obj_sql = funcionesSQL()
-    #obj_sql.test_db_conn()
-
-
-    while True:
-        if flag_v and flag_i is True:
-            print("Vectores recibidos, comienza analisis...")
-            flag_v = False
-            flag_i = False
-            datos.analize()
-
-
-
 def on_message_f_sampl(self, client, userdata, msg):
     electric_data.load_fs(float(msg.payload))
 
@@ -92,3 +66,31 @@ def conexion_mqtt():
     #client.on_message = on_message 
     client.connect('localhost', 1883, 60)
     client.loop_start()
+
+
+
+
+
+if __name__ == "__main__":
+
+    flag_v = False
+    flag_i = False
+
+    datos = electric_data(1, 0)
+
+    
+
+    # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
+    conn_mqtt = conexion_mqtt()
+
+    # Pruebo la conexion a la db
+    obj_sql = funcionesSQL()
+    #obj_sql.test_db_conn()
+
+
+    while True:
+        if flag_v and flag_i is True:
+            print("Vectores recibidos, comienza analisis...")
+            flag_v = False
+            flag_i = False
+            datos.analize()
