@@ -47,7 +47,7 @@ class mqtt_obj():
         pass
 
     def on_message_test(self, client, userdata, msg): 
-        print("Mensaje recibido: " + str(msg.payload))
+        print("Mensaje recibido en test: " + str(msg.payload))
 
 
     def on_message_server(self, client, userdata, msg): 

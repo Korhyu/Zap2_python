@@ -17,11 +17,9 @@ obj_mqtt.data.ts = 1/obj_mqtt.data.fs
 obj_mqtt.data.tm = 2
 vp = 311
 
-
-
-
 #server.publish(topic='/test', payload='sim cliente', qos=0, retain=False)
 print("Empienza el envio de datos")
+time.sleep(0.5)
 
 for j in range(obj_mqtt.data.fs * obj_mqtt.data.tm):
     n = random.randint(-100,100)
