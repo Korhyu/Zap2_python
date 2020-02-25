@@ -42,8 +42,9 @@ def on_message_test(client, userdata, msg):
 
 def on_message_tension(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
-    print(msg.topic + " " + str(int(msg.payload, 2)))
-    print(msg.topic + " " + str(float(int(msg.payload, 2))))
+    print(msg.topic + " " + str(msg.payload.decode("utf-8")))
+    print(msg.topic + " " + str(int(msg.payload.decode("utf-8"))))
+    print(msg.topic + " " + str(float(int(msg.payload.decode("utf-8"))/1000)))
     try:
         valor = float(int(msg.payload.decode("utf-8"))/1000)
         datos.v.append(valor)
