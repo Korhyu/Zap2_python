@@ -88,6 +88,7 @@ class funciones:
         print("Largo vector corriente: " + str(len(self.i)))
 
         for j in range(len(self.v)):
+            print("j: " + str(j))
             self.ps[j] = self.v[j] * self.i[j] / 1000
             self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
