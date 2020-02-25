@@ -19,9 +19,9 @@ class electric_data(funciones):
     flagV = False                      #Flag auxiliar de Tension
     flagI = False                      #Flag auxiliar de Corriente
 
-    pp = []                            #Potencia activa
-    pq = []                            #Potencia reactiva
-    ps = []                            #Potencia aparente
+    pp = [0]                           #Potencia activa
+    pq = [0]                           #Potencia reactiva
+    ps = [0]                           #Potencia aparente
     
     maxv_indx = 0                      #Indice de tension maxima
     maxi_indx = 0                      #Indice de corriente maxia
