@@ -11,10 +11,13 @@ from codecs import decode
 
 
 # Variables Globales
+global datos
+global vector_V
+global vector_I
+
 datos = electric_data(1, 0)
 vector_V = []
 vector_I = []
-
 
 
 
