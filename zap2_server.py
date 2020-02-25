@@ -45,7 +45,7 @@ def on_message_tension(client, userdata, msg):
     print(msg.topic + " " + str(float(msg.payload.decode("utf-8"))))
     try:
         valor = float(msg.payload.decode("utf-8"))
-        datos.v.append(valor)
+        vector_V.append(valor)
         print(str(valor) + " [V]")
         cont = cont + 1      
 
@@ -57,7 +57,7 @@ def on_message_tension(client, userdata, msg):
 def on_message_corriente(client, userdata, msg):
     try:
         valor = float(int(msg.payload, 2))
-        datos.i.append(valor)
+        vector_I.append(valor)
         print(str(valor) + " [A]")
         cont = cont + 1      
 
@@ -83,6 +83,8 @@ if __name__ == "__main__":
     flag_i = False
 
     datos = electric_data(1, 0)
+    vector_V = []
+    vector_I = []
 
     
 
@@ -97,6 +99,9 @@ if __name__ == "__main__":
     while True:
         if flag_v and flag_i is True:
             print("Vectores recibidos, comienza analisis...")
+            datos.load_data(vector_V, vector_I)
+            vector_V = []
+            vector_I = []
             flag_v = False
             flag_i = False
             datos.analize()
