@@ -38,6 +38,7 @@ def on_message_test(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
 
 def on_message_tension(client, userdata, msg):
+    print(msg.topic + " " + str(msg.payload))
     try:
         valor = float(literal_eval(msg.payload))
         datos.v.append(valor)
