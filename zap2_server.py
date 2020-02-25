@@ -87,11 +87,14 @@ def conexion_mqtt():
 
 if __name__ == "__main__":
 
+    global datos
+    global vector_V
+    global vector_I
+
     datos = electric_data(1, 0)
     vector_V = []
     vector_I = []
-    flag_v = False
-    flag_i = False
+
 
     # Me conecto a todos los Topics e indico las funciones que atienden a cada topic
     conn_mqtt = conexion_mqtt()
