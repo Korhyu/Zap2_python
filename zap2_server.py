@@ -22,11 +22,13 @@ def on_message_f_sampl(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
     datos.load_fs(valor)
+    print("Frecuencia de muestreo modificada: " + str(datos.fs))
 
 def on_message_t_muest(client, userdata, msg):
     global datos
     valor = float(msg.payload.decode("utf-8"))
-    datos.load_fs(valor)
+    datos.load_tm(valor)
+    print("Tiempo de muestreo modificado: " + str(datos.tm))
 
 
 
@@ -76,15 +78,12 @@ def on_message_corriente(client, userdata, msg):
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_I.append(valor)
-        #print(str(valor) + " [A]")
-        #cont = cont + 1      
+        #print(str(valor) + " [A]")     
 
     except ValueError:
         print("Fin de vector Corriente")
         datos.flagI = True
-        datos.load_current(vector_I)
-        vector_I = []
-        #cont = 0           
+        datos.load_current(vector_I)         
 
 def conexion_mqtt():
     client = mqtt.Client() 
@@ -118,9 +117,3 @@ if __name__ == "__main__":
             vector_V = []
             vector_I = []
             datos.analize()
-
-    """
-            if (datos.flagV and datos.flagI) is True:
-            print("Vectores recibidos, comienza analisis...")
-            datos.analize()
-"""

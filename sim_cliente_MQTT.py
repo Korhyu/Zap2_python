@@ -35,7 +35,7 @@ for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     if (j % 100) is 0:
         print("Enviado mensaje n " + str(j))
     
-    time.sleep(0.01)
+    time.sleep(0.015)
 
 msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)
@@ -53,7 +53,7 @@ for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     if (j % 100) is 0:
         print("Enviado mensaje n " + str(j))
     
-    time.sleep(0.02)
+    time.sleep(0.015)
 
 msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)
