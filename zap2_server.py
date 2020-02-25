@@ -85,8 +85,8 @@ def on_message_corriente(client, userdata, msg):
         vector_I = []
         #cont = 0
 
-        for j in range(len(datos.I)):
-            print(datos.I[j])
+        for j in range(len(datos.i)):
+            print(datos.i[j])
 
         if (datos.flagV and datos.flagI) is True:
             print("Vectores recibidos, comienza analisis...")
