@@ -44,7 +44,7 @@ def on_message_tension(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
     print(msg.topic + " " + str(float(msg.payload.decode("utf-8"))))
     try:
-        valor = float(int(msg.payload.decode("utf-8"))/1000)
+        valor = float(msg.payload.decode("utf-8"))
         datos.v.append(valor)
         print(str(valor) + " [V]")
         cont = cont + 1      
