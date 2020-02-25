@@ -12,18 +12,18 @@ from mqtt_functions import mqtt_obj
 obj_mqtt = mqtt_obj()
 server = obj_mqtt.connect_server('192.168.0.28', 1883, 60)
 
-obj_mqtt.data.fs = 1000
+obj_mqtt.data.fs = 250
 obj_mqtt.data.ts = 1/obj_mqtt.data.fs
-obj_mqtt.data.tm = 0.5
+obj_mqtt.data.tm = 0.06
 vp = 311
 ap = 2
 
-#server.publish(topic='/test', payload='sim cliente', qos=0, retain=False)
+
 print("Empienza el envio de datos")
 time.sleep(0.5)
 
-server.publish(topic='/config/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
-server.publish(topic='/config/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
+server.publish(topic='/medicion/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
+server.publish(topic='/medicion/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
 
 #Datos de tension
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
@@ -35,7 +35,7 @@ for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     if (j % 100) is 0:
         print("Enviado mensaje n " + str(j))
     
-    time.sleep(0.015)
+    time.sleep(0.01)
 
 msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)
@@ -53,7 +53,7 @@ for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
     if (j % 100) is 0:
         print("Enviado mensaje n " + str(j))
     
-    time.sleep(0.015)
+    time.sleep(0.01)
 
 msj_fin = "EoV"
 print("Enviado mensaje " + msj_fin)

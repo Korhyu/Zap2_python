@@ -37,8 +37,8 @@ def on_connect(client, userdata, flags, rc):
     MQTT_TOPICS = [ ("/test", 0),
                     ("/medicion/tension", 0),
                     ("/medicion/corriente", 0),
-                    ("/config/f_sampl", 0),
-                    ("/config/t_muest", 0)]
+                    ("/medicion/f_sampl", 0),
+                    ("/medicion/t_muest", 0)]
 
     client.subscribe(MQTT_TOPICS)
     client.message_callback_add("/medicion/tension", on_message_tension)
