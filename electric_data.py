@@ -110,6 +110,7 @@ class electric_data(funciones):
         #Calculo el tiempo final
         if self.ts is not 0 and self.tm is not 0:
             self.tfin = math.ceil(self.tm / self.ts)
+            print("Tfin: " + str(self.tfin))
             self.ps = [0] * self.tfin
             self.pq = [0] * self.tfin
             self.pp = [0] * self.tfin
