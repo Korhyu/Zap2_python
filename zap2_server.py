@@ -79,14 +79,12 @@ def on_message_corriente(client, userdata, msg):
         #cont = cont + 1      
 
     except ValueError:
-        print("Fin de vector")
+        print("Fin de vector " + str(datos.flagI) + str(datos.flagV))
         datos.flagI = True
         datos.load_current(vector_I)
         vector_I = []
         #cont = 0
 
-        for j in range(len(datos.i)):
-            print(datos.i[j])
 
         if (datos.flagV and datos.flagI) is True:
             print("Vectores recibidos, comienza analisis...")
