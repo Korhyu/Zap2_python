@@ -35,7 +35,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("/test", on_message_test)
 
     print("Conectado a los topicos:" )
-    for j in len(MQTT_TOPICS):
+    for j in range(len(MQTT_TOPICS)):
         print(str(MQTT_TOPICS[j][0]))
 
 
