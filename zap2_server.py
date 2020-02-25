@@ -61,7 +61,7 @@ def on_message_tension(client, userdata, msg):
 
     except ValueError:
         print("Fin de vector")
-        datos.flagv = True
+        datos.flagV = True
         datos.load_voltage(vector_V)
 
 def on_message_corriente(client, userdata, msg):
