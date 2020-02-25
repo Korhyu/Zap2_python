@@ -11,10 +11,6 @@ from codecs import decode
 
 
 # Variables Globales
-global datos
-global vector_V
-global vector_I
-
 datos = electric_data(1, 0)
 vector_V = []
 vector_I = []
@@ -53,6 +49,10 @@ def on_message_test(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
 
 def on_message_tension(client, userdata, msg):
+    global datos
+    global vector_V
+    global vector_I
+
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_V.append(valor)
@@ -68,6 +68,10 @@ def on_message_tension(client, userdata, msg):
             datos.analize()
 
 def on_message_corriente(client, userdata, msg):
+    global datos
+    global vector_V
+    global vector_I
+
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_I.append(valor)
