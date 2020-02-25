@@ -5,6 +5,7 @@ from mysql.connector import Error
 from mqtt_functions import mqtt_obj
 from sql_functions import funcionesSQL
 from electric_data import electric_data
+from ast import literal_eval
 
 
 def on_message_f_sampl(self, client, userdata, msg):
@@ -38,7 +39,7 @@ def on_message_test(client, userdata, msg):
 
 def on_message_tension(client, userdata, msg):
     try:
-        valor = float(msg.payload)
+        valor = float(literal_eval(msg.payload))
         datos.v.append(valor)
         print(str(valor) + " [V]")
         cont = cont + 1      
@@ -50,7 +51,7 @@ def on_message_tension(client, userdata, msg):
 
 def on_message_corriente(client, userdata, msg):
     try:
-        valor = float(msg.payload)
+        valor = float(literal_eval(msg.payload))
         datos.i.append(valor)
         print(str(valor) + " [A]")
         cont = cont + 1      
