@@ -18,11 +18,15 @@ vector_I = []
 
 
 
-def on_message_f_sampl(self, client, userdata, msg):
-    electric_data.load_fs(float(msg.payload))
+def on_message_f_sampl(client, userdata, msg):
+    global datos
+    valor = float(msg.payload.decode("utf-8"))
+    datos.load_fs(valor)
 
-def on_message_t_muest(self, client, userdata, msg):
-    electric_data.load_tm(float(msg.payload))
+def on_message_t_muest(client, userdata, msg):
+    global datos
+    valor = float(msg.payload.decode("utf-8"))
+    datos.load_fs(valor)
 
 
 
@@ -57,10 +61,10 @@ def on_message_tension(client, userdata, msg):
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_V.append(valor)
-        print(str(valor) + " [V]")   
+        #print(str(valor) + " [V]")   
 
     except ValueError:
-        print("Fin de vector")
+        print("Fin de vector Tension")
         datos.flagV = True
         datos.load_voltage(vector_V)
 
@@ -72,11 +76,11 @@ def on_message_corriente(client, userdata, msg):
     try:
         valor = float(msg.payload.decode("utf-8"))
         vector_I.append(valor)
-        print(str(valor) + " [A]")
+        #print(str(valor) + " [A]")
         #cont = cont + 1      
 
     except ValueError:
-        print("Fin de vector")
+        print("Fin de vector Corriente")
         datos.flagI = True
         datos.load_current(vector_I)
         vector_I = []
