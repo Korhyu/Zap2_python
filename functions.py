@@ -84,18 +84,12 @@ class funciones:
                     self.i[j] = self.i[j] + self.ai / arm_div[k] * math.sin(2*math.pi*self.freq_dat*self.t[j] * arm_freq[k] + self.phi)
 
     def power_calc(self):
-        """
-        print("Largo vector tension: " + str(len(self.v)))
-        print("Largo vector corriente: " + str(len(self.i)))
         for j in range(len(self.v)):
-            print(str(j) + "   " + str(self.v[j]) + "   " + str(self.i[j]))
-        """
-        for j in range(len(self.v)):
-            print("j: " + str(j))
             self.ps[j] = self.v[j] * self.i[j] / 1000
             self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
             self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
-            
+            print(str(j) + " " + str(pp[j]) + " " + str(ps[j]) + " " + str(pq[j]))
+
     def init_vect(self):
         print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
         
