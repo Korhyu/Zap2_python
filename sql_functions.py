@@ -43,7 +43,7 @@ class funcionesSQL:
             print("2")
             mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
             print("3")
-            recordTuple = (instalacion, tipo_med, tiempo, valor)
+            recordTuple = (str(instalacion), str(tipo_med), str(tiempo), str(valor))
             print(recordTuple)
             cursor.execute(mySql_insert_query, recordTuple)
             print("5")
