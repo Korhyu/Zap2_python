@@ -31,6 +31,34 @@ class funcionesSQL:
                 self.close()
                 print("MySQL connection is closed")
 
+    def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
+        try:
+            print("0")
+            connection = mysql.connector.connect(   host = self.host,
+                                                    database = self.database,
+                                                    user = self.user,
+                                                    password = self.password)
+            print("1")
+            cursor = connection.cursor()
+            print("2")
+            mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
+            recordTuple = (instalacion, tipo_med, tiempo, valor)
+            cursor.execute(mySql_insert_query, recordTuple)
+            connection.commit()
+            print("Datos insertados en la tabla medicion")
+
+        except mysql.connector.Error as error:
+            print("Error al insertar en la base de datos {}".format(error))
+
+        except:
+            print("CAOS!!!")
+
+        finally:
+            if (connection.is_connected()):
+                cursor.close()
+                connection.close()
+                print("Conexion cerada")
+
     def insertar_timestamp_db(self, timestamp, uso_horario = None):
         try:
             connection = mysql.connector.connect( self.conn )
