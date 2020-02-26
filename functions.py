@@ -165,18 +165,18 @@ class funciones:
         self.powfac = self.cosfi / math.pow(1 + math.pow(self.THD/100,2), 0.5)
 
     def printdata (self):
-        #print("Coeficientes de b ",self.b)
-        #print("Coeficientes de a ",self.a)
-        print("Tension eficaz ", self.ins2eff(self.v))
-        print("Tension maxima ", self.v[self.v.index(max(self.v))] )
-        print("Corriente eficaz ", self.ins2eff(self.i))
-        print("Corriente maxima ", self.i[self.i.index(max(self.i))] )
-        print("Frecuencia ", self.freq)
-        print("Coseno fi ", self.cosfi)
-        #print("Amplitud armonicos ", self.magA)
-        #print("Frecuenc armonicos ", self.freA)
-        print("THD ", self.THD, "%")
-        print("Power Factor ", self.powfac)
+        #print("\tCoeficientes de b \t\t",self.b)
+        #print("\tCoeficientes de a \t\t",self.a)
+        print("\tTension eficaz \t\t", self.ins2eff(self.v))
+        print("\tTension maxima \t\t", self.v[self.v.index(max(self.v))] )
+        print("\tCorriente eficaz \t\t", self.ins2eff(self.i))
+        print("\tCorriente maxima \t\t", self.i[self.i.index(max(self.i))] )
+        print("\tFrecuencia \t\t", self.freq)
+        print("\tCoseno fi \t\t", self.cosfi)
+        #print("\tAmplitud armonicos \t\t", self.magA)
+        #print("\tFrecuenc armonicos \t\t", self.freA)
+        print("\tTHD \t\t\t\t", self.THD, "%")
+        print("\tPower Factor \t\t", self.powfac)
         
 
     def design_filter(self, tipo, ripple_BP, frec_corte, sb_att, orden=None, plot=None):
