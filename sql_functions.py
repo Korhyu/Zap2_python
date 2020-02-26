@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-import datetime
 from electric_data import electric_data
 
 
@@ -60,7 +59,7 @@ class funcionesSQL:
             if (connection.is_connected()):
                 cursor.close()
                 connection.close()
-                print("Conexion cerada")
+                print("Conexion cerrada")
 
     def insertar_timestamp_db(self, timestamp, uso_horario = None):
         try:
@@ -82,18 +81,14 @@ class funcionesSQL:
             if (connection.is_connected()):
                 cursor.close()
                 connection.close()
-                print("Conexion cerada")
+                print("Conexion cerrada")
                 return ultimo_id
-
-    def get_hora(self):
-        fecha = str(datetime.datetime.now())
-        fecha = fecha[:19]
-        return fecha
 
 
     def send_db(self, info):
         datos = electric_data(1, 0)
         datos = info
 
+        datos.time_id = self.insertar_timestamp_db(datos.time_tag)
         self.insertar_medicion_db(10, 1, datos.time_id, datos.ins2eff(datos.v))              #Tension
         #self.insertar_medicion_db(10, 2, datos.time_id, datos.ins2eff(datos.i))              #Corriente

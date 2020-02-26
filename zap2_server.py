@@ -59,6 +59,8 @@ def on_message_test(client, userdata, msg):
 
 def on_message_time(client, userdata, msg):
     tag = str(msg.payload.decode("utf-8"))
+    self.datos.time_tag = electric_data.get_hora()
+    #self.datos.time_id = 
 
 
 def on_message_tension(client, userdata, msg):

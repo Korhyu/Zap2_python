@@ -1,6 +1,7 @@
 import random
 import math
 import numpy
+import datetime
 
 from scipy import signal
 
@@ -231,3 +232,9 @@ class funciones:
 
         filtf = abs(numpy.fft.rfft(self.filt))
         filtf = filtf / len(filtf)
+
+
+    def get_hora(self):
+        fecha = str(datetime.datetime.now())
+        fecha = fecha[:19]
+        return fecha
