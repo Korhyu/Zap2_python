@@ -42,8 +42,11 @@ class funcionesSQL:
             cursor = connection.cursor()
             print("2")
             mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
+            print("3")
             recordTuple = (instalacion, tipo_med, tiempo, valor)
+            print(recordTuple)
             cursor.execute(mySql_insert_query, recordTuple)
+            print("5")
             connection.commit()
             print("Datos insertados en la tabla medicion")
 
