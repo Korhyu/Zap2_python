@@ -38,7 +38,7 @@ def on_connect(client, userdata, flags, rc):
                     ("/medicion/tension", 0),
                     ("/medicion/corriente", 0),
                     ("/medicion/f_sampl", 0),
-                    ("/medicion/t_muest", 0)
+                    ("/medicion/t_muest", 0),
                     ("/medicion/time", 0)]
 
     client.subscribe(MQTT_TOPICS)
