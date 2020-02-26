@@ -6,10 +6,10 @@ from electric_data import electric_data
 
 class funcionesSQL:
     def __init__ (self):
-        self.conn = ''' host='localhost',
-                        database='zap2',
-                        user='zap2app',
-                        password='zap2app' '''
+        self.host='localhost'
+        self.database='zap2'
+        self.user='zap2app'
+        self.password='zap2app'
 
 
     def test_db_conn(self):
@@ -33,7 +33,10 @@ class funcionesSQL:
 
     def insertar_prueba_db(self, cadena, valor):
         try:
-            connection = mysql.connector.connect( self.conn )
+            connection = mysql.connector.connect(   host = self.host,
+                                                    database = self.database,
+                                                    user = self.user,
+                                                    password = self.password)
             cursor = connection.cursor()
             mySql_insert_query = """INSERT INTO prueba (cadena, coma) VALUES (%s, %s) """
             recordTuple = (cadena, valor)
