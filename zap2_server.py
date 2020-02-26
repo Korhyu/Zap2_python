@@ -91,16 +91,12 @@ def on_message_corriente(client, userdata, msg):
         datos.flagI = True
         datos.load_current(vector_I)         
 
-def conexion_mqtt():
+def conexion_mqtt(self):
     client = mqtt.Client() 
-    client.on_connect = on_connect 
+    client.on_connect = self.on_connect 
     #client.on_message = on_message 
     client.connect('localhost', 1883, 60)
     client.loop_start()
-    print("Mosquitto arriba.")
-
-
-
 
 
 if __name__ == "__main__":
