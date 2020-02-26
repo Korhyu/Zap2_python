@@ -33,7 +33,7 @@ def on_message_t_muest(client, userdata, msg):
 
 
 def on_connect(client, userdata, flags, rc): 
-    print("Connected with result code " + str(rc)) 
+    print("Connected with result codess " + str(rc)) 
     MQTT_TOPICS = [ ("/test", 0),
                     ("/medicion/tension", 0),
                     ("/medicion/corriente", 0),
@@ -59,7 +59,7 @@ def on_message_test(client, userdata, msg):
 
 def on_message_time(client, userdata, msg):
     tag = str(msg.payload.decode("utf-8"))
-    
+
 
 def on_message_tension(client, userdata, msg):
     global datos
