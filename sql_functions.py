@@ -95,5 +95,5 @@ class funcionesSQL:
         datos = electric_data(1, 0)
         datos = info
 
-        self.insertar_medicion_db(1, 1, datos.time_id, datos.ins2eff(datos.v))              #Tension
-        #self.insertar_medicion_db(1, 2, datos.time_id, datos.ins2eff(datos.i))              #Corriente
+        self.insertar_medicion_db(10, 1, datos.time_id, datos.ins2eff(datos.v))              #Tension
+        #self.insertar_medicion_db(10, 2, datos.time_id, datos.ins2eff(datos.i))              #Corriente
