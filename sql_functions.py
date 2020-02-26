@@ -71,6 +71,9 @@ class funcionesSQL:
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
 
+        except:
+            print("CAOS!!!")
+
         finally:
             if (connection.is_connected()):
                 cursor.close()
