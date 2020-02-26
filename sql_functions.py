@@ -3,22 +3,14 @@ from mysql.connector import Error
 import datetime
 from electric_data import electric_data
 
-"""
-datos = ''' host='localhost',
-            database='zap2',
-            user='zap2app',
-            password='zap2app' '''
-"""
 
 class funcionesSQL:
     def __init__ (self):
-
         self.conn = ''' host='localhost',
                         database='zap2',
                         user='zap2app',
                         password='zap2app' '''
 
-        pass
 
     def test_db_conn(self):
         try:
