@@ -60,8 +60,11 @@ class funcionesSQL:
 
     def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
         try:
+            print("0")
             connection = mysql.connector.connect( self.conn )
+            print("1")
             cursor = connection.cursor()
+            print("2")
             mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
             recordTuple = (instalacion, tipo_med, tiempo, valor)
             cursor.execute(mySql_insert_query, recordTuple)
