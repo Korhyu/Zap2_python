@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
-import electric_data
+from electric_data import electric_data
 
 datos = ''' host='localhost',
             database='zap2',
