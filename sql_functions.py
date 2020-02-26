@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
+import electric_data
 
 datos = ''' host='localhost',
             database='zap2',
@@ -63,7 +64,7 @@ class funcionesSQL:
         try:
             connection = mysql.connector.connect( self.datos )
             cursor = connection.cursor()
-            mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, timestamp, valor) VALUES (%s, %s, %s, %s) """
+            mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
             recordTuple = (instalacion, tipo_med, tiempo, valor)
             cursor.execute(mySql_insert_query, recordTuple)
             connection.commit()
@@ -105,3 +106,11 @@ class funcionesSQL:
         fecha = str(datetime.datetime.now())
         fecha = fecha[:19]
         return fecha
+
+
+    def send_db(self, info):
+        datos = electric_data()
+        datos = info
+
+        insertar_medicion_db(1, 1, datos.time_id, datos.ins2eff(datos.v))           #Tension
+        #insertar_medicion_db(1, 2, datos.time_id, datos.ins2eff(datos.i))           #Corriente

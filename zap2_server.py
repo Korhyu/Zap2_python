@@ -121,3 +121,4 @@ if __name__ == "__main__":
             vector_V = []
             vector_I = []
             datos.analize()
+            obj_sql.send_db(datos)
