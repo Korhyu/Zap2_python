@@ -176,7 +176,7 @@ class funciones:
         #print("\tAmplitud armonicos \t\t", self.magA)
         #print("\tFrecuenc armonicos \t\t", self.freA)
         print("\tTHD \t\t\t", float("{0:.2f}".format(self.THD), "%"))
-        print("\tPower Factor \t\t", float("{0:.2f}".format((self.powfac)))
+        print("\tPower Factor \t\t", float("{0:.2f}".format((self.powfac))))
         
 
     def design_filter(self, tipo, ripple_BP, frec_corte, sb_att, orden=None, plot=None):
