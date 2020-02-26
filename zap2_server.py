@@ -38,13 +38,15 @@ def on_connect(client, userdata, flags, rc):
                     ("/medicion/tension", 0),
                     ("/medicion/corriente", 0),
                     ("/medicion/f_sampl", 0),
-                    ("/medicion/t_muest", 0)]
+                    ("/medicion/t_muest", 0)
+                    ("/medicion/time", 0)]
 
     client.subscribe(MQTT_TOPICS)
     client.message_callback_add("/medicion/tension", on_message_tension)
     client.message_callback_add("/medicion/corriente", on_message_corriente)
     client.message_callback_add("/medicion/f_sampl", on_message_f_sampl)
     client.message_callback_add("/medicion/t_muest", on_message_t_muest)
+    client.message_callback_add("/medicion/time", on_message_time)
     client.message_callback_add("/test", on_message_test)
 
     print("Conectado a los topicos:" )
@@ -54,6 +56,10 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message_test(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
+
+def on_message_time(client, userdata, msg):
+    tag = str(msg.payload.decode("utf-8"))
+    
 
 def on_message_tension(client, userdata, msg):
     global datos

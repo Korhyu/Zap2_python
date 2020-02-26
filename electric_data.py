@@ -12,6 +12,9 @@ class electric_data(funciones):
     ai = 0
     phi = 0
 
+    time_tag = ""                       #Etiqueta temporal de la medicion
+    time_id = 0                         #ID dentro de la tabla de tiempo
+
     v = []                             #Vector de tension
     i = []                             #Vector de corriente
     t = []                             #Vector de tiempo
