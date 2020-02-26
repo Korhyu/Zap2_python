@@ -175,7 +175,7 @@ class funciones:
         print("\tCoseno fi \t\t", float("{0:.2f}".format(self.cosfi)))
         #print("\tAmplitud armonicos \t\t", self.magA)
         #print("\tFrecuenc armonicos \t\t", self.freA)
-        print("\tTHD \t\t\t" + str(float("{0:.2f}".format(self.THD)) + "%"))
+        #print("\tTHD \t\t\t" + str(float("{0:.2f}".format(self.THD)) + "%"))
         print("\tPower Factor \t\t", float("{0:.2f}".format((self.powfac))))
         
 
