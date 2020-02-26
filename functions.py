@@ -92,7 +92,7 @@ class funciones:
             #print(str(j) + " " + str(self.pp[j]) + " " + str(self.ps[j]) + " " + str(self.pq[j]))
 
     def init_vect(self):
-        print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
+        #print("tm: " + str(self.tm) + "   ts: " + str(self.ts) + "   tfin: " + str(self.tfin) )
         
         self.tfin = math.ceil(self.tm / self.ts)
 
@@ -169,13 +169,13 @@ class funciones:
         #print("\tCoeficientes de a \t\t",self.a)
         print("\tTension eficaz \t\t", self.ins2eff(self.v))
         print("\tTension maxima \t\t", self.v[self.v.index(max(self.v))] )
-        print("\tCorriente eficaz \t\t", self.ins2eff(self.i))
-        print("\tCorriente maxima \t\t", self.i[self.i.index(max(self.i))] )
+        print("\tCorriente eficaz \t", self.ins2eff(self.i))
+        print("\tCorriente maxima \t", self.i[self.i.index(max(self.i))] )
         print("\tFrecuencia \t\t", self.freq)
         print("\tCoseno fi \t\t", self.cosfi)
         #print("\tAmplitud armonicos \t\t", self.magA)
         #print("\tFrecuenc armonicos \t\t", self.freA)
-        print("\tTHD \t\t\t\t", self.THD, "%")
+        print("\tTHD \t\t\t", self.THD, "%")
         print("\tPower Factor \t\t", self.powfac)
         
 
