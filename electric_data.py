@@ -121,6 +121,8 @@ class electric_data(funciones):
         self.THD_cal()                                  #Calculo THD
         self.PF_cal()                                   #Calculo del power factor
 
+        self.printdata()
+
 
     def show_data(self):
         self.plot_data()

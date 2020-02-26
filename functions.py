@@ -22,7 +22,7 @@ class funciones:
         Cuenta cada "cero" cada vez que pasa desde negativo a positivo"""
         zf = 0
         for j in range(len(vec)):
-            print(str(vec[j]))
+            #print(str(j) + " " + str(vec[j]))
             if vec[j] < 0 and vec[j+1] > 0:
                 zf = zf + 1
             if zf >= nz:
@@ -167,14 +167,14 @@ class funciones:
     def printdata (self):
         #print("Coeficientes de b ",self.b)
         #print("Coeficientes de a ",self.a)
-        #print("Tension eficaz ", self.ins2eff(self.v))
-        #print("Tension maxima ", self.v[self.v.index(max(self.v))] )
-        #print("Corriente eficaz ", self.ins2eff(self.i))
-        #print("Corriente maxima ", self.i[self.i.index(max(self.i))] )
+        print("Tension eficaz ", self.ins2eff(self.v))
+        print("Tension maxima ", self.v[self.v.index(max(self.v))] )
+        print("Corriente eficaz ", self.ins2eff(self.i))
+        print("Corriente maxima ", self.i[self.i.index(max(self.i))] )
         print("Frecuencia ", self.freq)
         print("Coseno fi ", self.cosfi)
-        print("Amplitud armonicos ", self.magA)
-        print("Frecuenc armonicos ", self.freA)
+        #print("Amplitud armonicos ", self.magA)
+        #print("Frecuenc armonicos ", self.freA)
         print("THD ", self.THD, "%")
         print("Power Factor ", self.powfac)
         
