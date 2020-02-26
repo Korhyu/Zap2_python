@@ -109,7 +109,7 @@ class funcionesSQL:
 
 
     def send_db(self, info):
-        datos = electric_data()
+        datos = electric_data(1, 0)
         datos = info
 
         insertar_medicion_db(1, 1, datos.time_id, datos.ins2eff(datos.v))           #Tension
