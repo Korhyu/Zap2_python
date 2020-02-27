@@ -60,9 +60,9 @@ def on_message_test(self, client, userdata, msg):
 def on_message_time(self, client, userdata, msg):
     global datos
     
-    tag = str(msg.payload.decode("utf-8"))
-    datos.time_tag = datos.get_hora()
-    #self.datos.time_id = 
+    #tag = str(msg.payload.decode("utf-8"))
+    datos.time_tag = function.get_hora()
+    #self.datos.time_id = S
 
 
 def on_message_tension(client, userdata, msg):

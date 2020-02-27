@@ -235,6 +235,4 @@ class funciones:
 
 
     def get_hora(self):
-        fecha = str(datetime.datetime.now())
-        fecha = fecha[:19]
-        return fecha
+        return str(datetime.datetime.now())[:19]
