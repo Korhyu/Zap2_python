@@ -32,20 +32,15 @@ class funcionesSQL:
 
     def insertar_medicion_db(self, instalacion, tipo_med, tiempo, valor):
         try:
-            print("0")
             connection = mysql.connector.connect(   host = self.host,
                                                     database = self.database,
                                                     user = self.user,
                                                     password = self.password)
-            print("1")
             cursor = connection.cursor()
-            print("2")
             mySql_insert_query = """INSERT INTO medicion (instalacion, tipom, time_id, valor) VALUES (%s, %s, %s, %s) """
-            print("3")
             recordTuple = (str(instalacion), str(tipo_med), str(tiempo), str(valor))
             print(recordTuple)
             cursor.execute(mySql_insert_query, recordTuple)
-            print("5")
             connection.commit()
             print("Datos insertados en la tabla medicion")
 
@@ -53,7 +48,7 @@ class funcionesSQL:
             print("Error al insertar en la base de datos {}".format(error))
 
         except:
-            print("CAOS!!!")
+            print("CAOS MEDICION!!!")
 
         finally:
             if (connection.is_connected()):
@@ -69,7 +64,7 @@ class funcionesSQL:
                                                     password = self.password)
             cursor = connection.cursor()
             mySql_insert_query = """INSERT INTO tiempo (timestamp, uso_horario) VALUES (%s, %s) """
-            recordTuple = (timestamp, uso_horario)
+            recordTuple = (timestamp, str(int(uso_horario)))
             cursor.execute(mySql_insert_query, recordTuple)
             connection.commit()
             mySql_insert_query = """SELECT MAX(id) FROM tiempo"""
