@@ -83,7 +83,7 @@ class funcionesSQL:
                 cursor.close()
                 connection.close()
                 print("Conexion cerrada")
-                return ultimo_id[0] 
+                return ultimo_id[0][0]
                 #return int(ultimo_id[0].split('(')[1].split(',')[0])
 
 
