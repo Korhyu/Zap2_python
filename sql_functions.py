@@ -61,7 +61,7 @@ class funcionesSQL:
                 connection.close()
                 print("Conexion cerrada")
 
-    def insertar_timestamp_db(self, timestamp, uso_horario = None):
+    def insertar_timestamp_db(self, timestamp, uso_horario = 0):
         try:
             connection = mysql.connector.connect(   host = self.host,
                                                     database = self.database,
