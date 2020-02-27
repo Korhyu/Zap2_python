@@ -54,12 +54,14 @@ def on_connect(client, userdata, flags, rc):
         print("\t" + str(MQTT_TOPICS[j][0]))
 
 
-def on_message_test(client, userdata, msg):
+def on_message_test(self, client, userdata, msg):
     print(msg.topic + " " + str(msg.payload))
 
-def on_message_time(client, userdata, msg):
+def on_message_time(self, client, userdata, msg):
+    global datos
+    
     tag = str(msg.payload.decode("utf-8"))
-    self.datos.time_tag = datos.get_hora()
+    datos.time_tag = datos.get_hora()
     #self.datos.time_id = 
 
 
