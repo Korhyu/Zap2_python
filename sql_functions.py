@@ -70,7 +70,7 @@ class funcionesSQL:
             mySql_insert_query = """SELECT MAX(id) FROM tiempo"""
             cursor.execute(mySql_insert_query)
             ultimo_id = cursor.fetchall()
-            print("Datos insertados en la tabla time " + timestamp + " " + uso_horario + " " + ultimo_id)
+            print("Datos insertados en la tabla time " + str(timestamp) + " " + str(uso_horario) + " " + str(ultimo_id))
 
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
