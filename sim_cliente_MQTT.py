@@ -18,14 +18,13 @@ obj_mqtt.data.tm = 0.5
 vp = 311
 ap = 2
 
-time_tag = 
 
 print("Empienza el envio de datos")
 time.sleep(0.5)
 
 server.publish(topic='/medicion/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
 server.publish(topic='/medicion/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
-server.publish(topic='/medicion/time', payload=obj_mqtt.data.tm, qos=0, retain=False)
+server.publish(topic='/medicion/time', payload='TG', qos=0, retain=False)
 
 #Datos de tension
 for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
