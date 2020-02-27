@@ -64,7 +64,7 @@ class funcionesSQL:
                                                     password = self.password)
             cursor = connection.cursor()
             mySql_insert_query = """INSERT INTO tiempo (timestamp, uso_horario) VALUES (%s, %s) """
-            recordTuple = (timestamp, str(int(uso_horario)))
+            recordTuple = (timestamp, uso_horario)
             cursor.execute(mySql_insert_query, recordTuple)
             connection.commit()
             mySql_insert_query = """SELECT MAX(id) FROM tiempo"""
@@ -83,7 +83,7 @@ class funcionesSQL:
                 cursor.close()
                 connection.close()
                 print("Conexion cerrada")
-                return int(ultimo_id[0]    
+                return ultimo_id[0] 
                 #return int(ultimo_id[0].split('(')[1].split(',')[0])
 
 
