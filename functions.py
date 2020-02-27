@@ -87,9 +87,9 @@ class funciones:
 
     def power_calc(self):
         for j in range(len(self.v)):
-            self.ps[j] = self.v[j] * self.i[j] / 1000
-            self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi) / 1000
-            self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi) / 1000
+            self.ps[j] = self.v[j] * self.i[j]
+            self.pq[j] = self.v[j] * self.i[j] * math.sin(self.phi)
+            self.pp[j] = self.v[j] * self.i[j] * math.cos(self.phi)
             #print(str(j) + " " + str(self.pp[j]) + " " + str(self.ps[j]) + " " + str(self.pq[j]))
 
     def init_vect(self):

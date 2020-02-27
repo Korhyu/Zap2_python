@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 
     while True:
-        time.sleep(2)
+        #time.sleep(2)
 
         #print("datos.flagV: " + str(datos.flagV) + "  datos.flagI: " + str(datos.flagI))
 

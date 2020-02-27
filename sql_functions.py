@@ -54,7 +54,7 @@ class funcionesSQL:
             if (connection.is_connected()):
                 cursor.close()
                 connection.close()
-                print("Conexion cerrada")
+                #print("Conexion cerrada")
 
     def insertar_timestamp_db(self, timestamp, uso_horario = 0):
         try:
@@ -82,7 +82,7 @@ class funcionesSQL:
             if (connection.is_connected()):
                 cursor.close()
                 connection.close()
-                print("Conexion cerrada")
+                #print("Conexion cerrada")
                 return ultimo_id[0][0]
                 #return int(ultimo_id[0].split('(')[1].split(',')[0])
 
