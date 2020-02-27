@@ -83,7 +83,8 @@ class funcionesSQL:
                 cursor.close()
                 connection.close()
                 print("Conexion cerrada")
-                return int(ultimo_id.split('(')[1].split(',')[0])
+                return int(ultimo_id[0]    
+                #return int(ultimo_id[0].split('(')[1].split(',')[0])
 
 
     def send_db(self, info):
