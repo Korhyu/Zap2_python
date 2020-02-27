@@ -18,6 +18,7 @@ obj_mqtt.data.tm = 0.5
 vp = 311
 ap = 2
 
+time.sleep(0.5)
 print("Empienza el envio de datos")
 server.publish(topic='/medicion/f_sampl', payload=obj_mqtt.data.fs, qos=0, retain=False)
 server.publish(topic='/medicion/t_muest', payload=obj_mqtt.data.tm, qos=0, retain=False)
@@ -48,7 +49,7 @@ for j in range(60):
 
     for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
         n = random.randint(-100,100)/10000
-        num = ap * math.sin(2 * math.pi* 50 * j * obj_mqtt.data.ts + math.pi/6) + ap * n
+        num = ap * math.sin(2 * math.pi* 50 * j * obj_mqtt.data.ts + math.pi/12) + ap * n
         num = float("{0:.3f}".format(num))
         server.publish(topic='/medicion/corriente', payload=num, qos=0, retain=False)
 
