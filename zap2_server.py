@@ -61,7 +61,7 @@ def on_message_time(client, userdata, msg):
     global datos
     
     #tag = str(msg.payload.decode("utf-8"))
-    datos.time_tag = function.get_hora()
+    datos.time_tag = datos.get_hora()
     #self.datos.time_id = S
 
 
