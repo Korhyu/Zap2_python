@@ -92,5 +92,10 @@ class funcionesSQL:
         datos = info
 
         datos.time_id = self.insertar_timestamp_db(datos.time_tag)
-        self.insertar_medicion_db(10, 1, datos.time_id, datos.ins2eff(datos.v))              #Tension
-        #self.insertar_medicion_db(10, 2, datos.time_id, datos.ins2eff(datos.i))              #Corriente
+        self.insertar_medicion_db(10, 1, datos.time_id, datos.ins2eff(datos.v))                 #Tension
+        self.insertar_medicion_db(10, 2, datos.time_id, datos.ins2eff(datos.i))                 #Corriente
+        self.insertar_medicion_db(10, 3, datos.time_id, datos.cosfi)                            #Cosenofi
+        self.insertar_medicion_db(10, 4, datos.time_id, datos.freq)                             #Frecuencia
+        self.insertar_medicion_db(10, 5, datos.time_id, datos.ins2eff(datos.pp))                #Potencia Activa
+        self.insertar_medicion_db(10, 6, datos.time_id, datos.ins2eff(datos.pq))                #Potencia Reactiva
+        self.insertar_medicion_db(10, 7, datos.time_id, datos.ins2eff(datos.ps))                #Potencia Aparente
