@@ -28,7 +28,7 @@ for j in range(60):
     #Datos de tension
     for j in range(math.ceil(obj_mqtt.data.fs * obj_mqtt.data.tm)):
         n = random.randint(-100,100)/10000
-        num = vp * math.sin(2 * math.pi* 50 * j * obj_mqtt.data.ts) + vp * n
+        num = vp * math.sin(2 * math.pi * 50 * j * obj_mqtt.data.ts) + vp * n
         num = float("{0:.3f}".format(num))
         server.publish(topic='/medicion/tension', payload=num, qos=0, retain=False)
 

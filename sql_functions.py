@@ -42,7 +42,7 @@ class funcionesSQL:
             #print(recordTuple)
             cursor.execute(mySql_insert_query, recordTuple)
             connection.commit()
-            print("Datos insertados en la tabla medicion")
+            print("Datos insertados en la tabla medicion - tipo medicion: " + str(tipo_med))
 
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
