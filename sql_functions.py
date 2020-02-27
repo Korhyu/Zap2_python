@@ -63,7 +63,10 @@ class funcionesSQL:
 
     def insertar_timestamp_db(self, timestamp, uso_horario = None):
         try:
-            connection = mysql.connector.connect( self.conn )
+            connection = mysql.connector.connect(   host = self.host,
+                                                    database = self.database,
+                                                    user = self.user,
+                                                    password = self.password)
             cursor = connection.cursor()
             mySql_insert_query = """INSERT INTO tiempo (timestamp, uso_horario) VALUES (%s, %s) """
             recordTuple = (timestamp, uso_horario)
@@ -76,6 +79,9 @@ class funcionesSQL:
 
         except mysql.connector.Error as error:
             print("Error al insertar en la base de datos {}".format(error))
+
+        except:
+            print("CAOS TEMPORAL!!!")
 
         finally:
             if (connection.is_connected()):
